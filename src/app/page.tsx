@@ -1,8 +1,9 @@
-import { RedirectType, redirect } from "next/navigation";
+import Header from "@/ui/header/header";
+import { redirect } from "next/navigation";
 
 export default function Home() {
 
-    redirect('/preview', RedirectType.push);
+    redirect('/preview');
 
     return null;
 }
