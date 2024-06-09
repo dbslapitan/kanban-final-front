@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.scss";
 import { plusJakartaSans } from "@/libs/fonts";
 
 export const metadata: Metadata = {
