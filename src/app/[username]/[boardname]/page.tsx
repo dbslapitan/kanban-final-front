@@ -7,11 +7,10 @@ export default async function Username({ params }: { params: {username: string, 
 
     try{
         const { data } = await axios.get(`${URI}/api/v1/preview/boards`);
-        console.log(data)
 
         return (
             <>
-                <Header columnNames={['dirk']}/>
+                <Header boards={data}/>
             </>
         );
     }
