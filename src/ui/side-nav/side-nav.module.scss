@@ -52,6 +52,10 @@
         padding: 1rem 1.5rem 3rem 0;
     }
 
+    &--opaque{
+        opacity: 0;
+    }
+
     &__count{
         @include heading-s;
         padding-left: 1.5rem;

@@ -1,6 +1,6 @@
 'use client';
 
-import { MouseEvent, useContext, useState } from 'react';
+import { MouseEvent, useContext, useEffect, useState } from 'react';
 import style from './side-nav.module.scss';
 import { NavContext } from '../provider/provider';
 import { useRouter } from 'next/router';
@@ -10,11 +10,16 @@ import { useParams } from 'next/navigation';
 import sun from '/public/icons/icon-light-theme.svg';
 import moon from '/public/icons/icon-dark-theme.svg';
 import Image from 'next/image';
+import { useTheme } from 'next-themes';
 
 export default function SideNav({ boards }: { boards: IBoardNames[] }){
 
     const { isNavOpen, setIsNavOpen } = useContext(NavContext);
     const [isShrunken, setIsShrunken] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+    const { resolvedTheme, setTheme } = useTheme();
+
+    useEffect(() => setIsMounted(true), []);
 
     //const router = useRouter();
     const { boardName, username } = useParams();
@@ -43,6 +48,7 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
     }
 
     const toggleClick = () => {
+        setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
     }
 
     const toggleShrink = () => {
@@ -69,11 +75,11 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
                         </li>
                     </ul>
                     <div className={`${style['nav__theme']}`}>
-                        <Image src={sun} alt='sun icon for theme'></Image>
-                        <div className={`${style['nav__toggle-container']}`} onClick={toggleClick}>
+                        <Image className={`${!isMounted ? style['nav--opaque'] : ''}`} src={sun} alt='sun icon for theme'></Image>
+                        <div  className={`${style['nav__toggle-container']} ${!isMounted ? style['nav--opaque'] : ''} ${isMounted && resolvedTheme === 'dark' ? style['nav__toggle-container--right'] : ''}`} onClick={toggleClick}>
                             <span className={`${style['nav__toggle']}`}></span>
                         </div>
-                        <Image src={moon} alt='moon icon for theme'></Image>
+                        <Image className={`${!isMounted ? style['nav--opaque'] : ''}`} src={moon} alt='moon icon for theme'></Image>
                     </div>
                     <button className={`${style['nav__hide']}`} onClick={toggleShrink}>Hide Sidebar</button>
                 </nav>

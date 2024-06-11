@@ -1,5 +1,6 @@
 'use client';
 
+import { ThemeProvider } from "next-themes";
 import { Dispatch, ReactNode, SetStateAction, createContext, useEffect, useState } from "react";
 
 export const NavContext = createContext<INavContext>({isNavOpen: false, setIsNavOpen: () => {}});
@@ -14,7 +15,9 @@ export function Providers({children}: {children: ReactNode}){
 
     return (
         <NavContext.Provider value={{ isNavOpen, setIsNavOpen }}>
-            { children }
+            <ThemeProvider>
+                { children }
+            </ThemeProvider>
         </NavContext.Provider>
     )
 }
