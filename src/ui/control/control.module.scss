@@ -1,0 +1,64 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.control{
+    display: flex;
+    margin: 0;
+    position: relative;
+    z-index: 1000;
+
+    &__ellipsis{
+        min-width: 0.25rem;
+        min-height: 1rem;
+        background-image: url('../../../public/icons/icon-vertical-ellipsis.svg');
+        border: none;
+        background-repeat: no-repeat;
+        background-size: 0.25rem 1rem;
+        background-position: center;
+        background-color: inherit;
+        cursor: pointer;
+        padding: 0 0.5rem;
+        margin-left: 0.5rem;
+    }
+}
+
+.options {
+    min-width: 12rem;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 1rem);
+    border-radius: 8px;
+    box-shadow: 0px 10px 20px 0px rgba(54, 78, 126, 0.25);
+    background-color: var(--background);
+    display: none;
+
+    &--show{
+        display: unset;
+    }
+
+    @include tablet {
+        min-width: 12rem;
+    }
+
+    &__option {
+        @include body-l;
+        border: none;
+        background-color: inherit;
+        font-weight: 500;
+        color: $mediumGray;
+        text-align: start;
+        padding: 1rem 1rem 0.5rem 1rem;
+        width: 100%;
+        cursor: pointer;
+
+        &--delete {
+            color: $red;
+            padding: 0.5rem 1rem 1rem 1rem;
+        }
+
+        &--disabled{
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+}

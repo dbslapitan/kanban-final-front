@@ -59,3 +59,46 @@
         }
     }
 }
+
+.add{
+    background-color: $purple;
+    border: none;
+    background-image: url('../../../public/icons/icon-add-task-mobile.svg');
+    min-width: 3rem;
+    min-height: 2rem;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 24px;
+    margin: 0 0 0 auto;
+
+    @include tablet{
+        background-image: none;
+    }
+
+    &--disabled{
+        opacity: 25%;
+        pointer-events: none;
+    }
+
+    &__text{
+        display: none;
+
+        @include tablet{
+            display: inline-block;
+            @include heading-m;
+            color: $white;
+            font-weight: $bold;
+            padding: 1rem 1.5rem;
+
+            &::before{
+                content: '+ ';
+            }
+        }
+    }
+
+    &:hover{
+        background-color: $lightPurple;
+        cursor: pointer;
+    }
+
+}

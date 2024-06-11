@@ -2,6 +2,7 @@ import Link from "next/link";
 import style from "./header.module.scss";
 import { IBoardNames } from "@/models/BoardNames";
 import Title from "@/ui/title/title";
+import Control from "@/ui/control/control";
 
 export default async function Header({ boards }: { boards: IBoardNames[] }) {
 
@@ -12,6 +13,10 @@ export default async function Header({ boards }: { boards: IBoardNames[] }) {
             </div>
             <div className={`${style['header__right']}`}>
                 <Title boards={boards} />
+                <Link className={`${style['add']} ${!boards.length ? style['add--disabled'] : ''}`} href={`#`}>
+                    <span className={`${style['add__text']}`}>Add New Task</span>
+                </Link>
+                <Control level="Board" isDisabled={ !!!boards.length }/>
             </div>
         </header>
     );
