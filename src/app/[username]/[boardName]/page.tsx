@@ -16,12 +16,6 @@ export default async function Username({ params }: { params: { username: string,
                 <Header boards={data} />
                 <main className={`${style['main']}`}>
                     <SideNav boards={data} />
-                    {
-                        <div className={`${style['main__page']} ${!data.length ? style["main__page--show"] : ''}`}>
-                            <p className={`${style['main__text']}`}>You don{`'`}t have a board. Create a new board to get started.</p>
-                            <Link className={`button ${style['main__add']}`} href={'/preview/board/add'}>+ Add New Board</Link>
-                        </div>
-                    }
                 </main>
             </>
         );
