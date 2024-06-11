@@ -1,0 +1,27 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.task{
+    display: block;
+    background-color: var(--background);
+    padding: 1.5rem 1rem;
+    border-radius: 0.5rem;
+
+    &__title{
+        @include heading-m;
+        font-weight: $bold;
+        color: var(--headerColor);
+    }
+
+    &__subtasks{
+        @include body-m;
+        width: 100%;
+        color: $mediumGray;
+        font-weight: $bold;
+        margin-top: 0.5rem;
+    }
+
+    &__dragged{
+        opacity: 0.5;
+    }
+}

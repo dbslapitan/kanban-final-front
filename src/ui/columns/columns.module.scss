@@ -1,0 +1,12 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.columns{
+    display: flex;
+    height: 100%;
+    flex-grow: 1;
+    background-color: var(--toggleBackground);
+    padding: 1.5rem 1rem 0;
+    column-gap: 1.5rem;
+    overflow: auto;
+}

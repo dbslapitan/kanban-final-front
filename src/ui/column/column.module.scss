@@ -1,0 +1,31 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.column{
+    flex-direction: column;
+    max-width: 17.5rem;
+    min-width: 17.5rem;
+
+    &__name{
+        @include heading-s;
+        display: flex;
+        font-weight: $bold;
+        text-transform: uppercase;
+    }
+
+    &__color{
+        display: inline-block;
+        min-width: 0.9375rem;
+        min-height: 0.9375rem;
+        border-radius: 7.5px;
+        margin-right: 0.75rem;
+    }
+
+    &__tasks{   
+        display: flex;
+        flex-direction: column;
+        row-gap: 1.25rem;
+        padding-top: 1.25rem;
+        padding-bottom: 5rem;
+    }
+}

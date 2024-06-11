@@ -1,5 +1,6 @@
 import { IColumn } from '@/models/column';
 import style from './columns.module.scss';
+import Column from '@/ui/column/column';
 
 export default function Columns({ columns }: { columns: IColumn[] }){
     return (
@@ -7,7 +8,7 @@ export default function Columns({ columns }: { columns: IColumn[] }){
             {
                 columns.map(column => {
                     return(
-                        <></>
+                        <Column key={column._id} column={column}/>
                     );
                 })
             }
