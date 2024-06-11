@@ -3,25 +3,50 @@
 
 .title{
     @include heading-l;
+    font-weight: $bold;
+    display: flex;
+    align-items: center;
+
+    @include tablet{
+        font-size: 1.25rem;
+    }
+
+    @include desktop{
+        @include heading-xl;
+    }
+
 
     &__toggle{
+        background-color: unset;
+        border: 0;
+        display: flex;
+        column-gap: 9px;
         font-size: inherit;
         font-weight: inherit;
         line-height: inherit;
-        border: none;
-        background-color: inherit;
 
+        @include tablet{
+            display: none;
+        }   
+    
         &::after{
-            content: ' ';
-            height: 0.5rem;
-            width: 0.625rem;
-            background-image: url('../../../public/icons/icon-chevron-down.svg');
-            display: inline-block;
-            background-position: center;
-            background-repeat: no-repeat;
+            content: url('../../../public/icons/icon-chevron-down.svg');
             position: relative;
-            bottom: 2px;
-            margin-left: 0.5rem;
+            bottom: 3px;
+        }
+    
+        &--up{
+            &::after{
+                content: url('../../../public/icons/icon-chevron-up.svg');
+            }
+        }
+    }
+
+    &__text{
+        display: none;
+
+        @include tablet{
+            display: unset;
         }
     }
 }

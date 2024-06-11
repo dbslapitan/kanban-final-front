@@ -4,14 +4,14 @@ import { IBoardNames } from "@/models/BoardNames";
 import Title from "@/ui/title/title";
 
 export default async function Header({ boards }: { boards: IBoardNames[] }) {
-    
+
     return (
-        <header className={`${style['header']}`}>
+        <header className={`${style["header"]}`}>
             <div className={`${style['header__left']}`}>
                 <Link href={'/'} className={`${style["header__logo"]}`}></Link>
             </div>
             <div className={`${style['header__right']}`}>
-                <Title boards={boards}/>
+                <Title boards={boards} />
             </div>
         </header>
     );

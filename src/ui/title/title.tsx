@@ -14,15 +14,15 @@ export default function Title({ boards }: { boards: IBoardNames[] }){
     const selected = boards.find(board => board.slugified === boardName);
 
     const handleClick = () => {
-
+        setIsNavOpen(!isNavOpen);
     };
 
     return(
         <h1 className={`${style['title']}`}>
-            <button className={`${style['title__toggle']}`} onClick={handleClick}>
+            <button className={`${style['title__toggle']} ${isNavOpen ? style['title__toggle--up'] : ''}`} onClick={handleClick}>
                 {selected?.name}
             </button>
-            {/* <span className={`${style['title__text']}`}>{selected?.name}</span> */}
+            <span className={`${style['title__text']}`}>{selected?.name}</span>
         </h1>
     );
 }

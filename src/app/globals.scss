@@ -1,22 +1,142 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins' as *;
+
+html{
+  box-sizing: border-box;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
 *{
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
 }
 
 *, *::before, *::after{
-    box-sizing: inherit;
-  } 
-
-html{
-    box-sizing: border-box;
-}
+  box-sizing: inherit;
+}   
 
 a{
     text-decoration: none;
     display: block;
 }
 
+body{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+main{
+    flex-grow: 1;
+}
+
 ul{
     list-style: none;
+}
+
+:root{
+    --background: #{$white};
+    --headerColor: #{$black};   
+    --logo: url('../../public/logos/logo-dark.svg');
+    --toggleBackground: #{$light};
+    --border: #{$lightBorder};
+    --label: #{$mediumGray};
+    --inputBoarder: 1px solid rgba(130, 143, 163, 0.25);
+    --buttonBackground:  rgba(99, 95, 199, 0.10);
+    --buttonHover: rgba(99, 95, 199, 0.25);
+    --hoverBackground: #635FC71A;
+    --checkboxBorder: #828fa340;
+    --subtaskColor: #00011240;
+}
+
+[data-theme='dark']{
+    --background: #{$darkGray};
+    --headerColor: #{$white};
+    --logo: url('../../public/logos/logo-light.svg');
+    --toggleBackground: #{$grayBlack};
+    --border: #{$darkBorder};
+    --label: #{$white};
+    --inputBoarder: 1px solid rgba(130, 143, 163, 0.25);
+    --buttonBackground:  #{$white};
+    --buttonHover: #{$white};
+    --hoverBackground: #FFFFFF;
+    --checkboxBorder: #{$white};
+    --subtaskColor: #FFFFFF40;
+}
+
+.input{
+    padding: 1rem 0.5rem;
+    border-radius: 0.25rem;
+    border: var(--inputBoarder);
+    background-color: inherit;
+    outline: none;
+
+    &__error{
+        border: 1px solid $red;
+    }
+
+    &__message{
+        position: absolute;
+    }
+
+    &:focus{
+        border: 1px solid $purple;
+    }
+
+    &::placeholder{
+        color: var(--subtaskColor);
+    }
+}
+
+.input-container{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+
+    label{
+        width: 100%;
+    }
+
+}
+
+.input + .input__message{
+    @include body-l;
+    display: none;
+    color: $red;
+    position: absolute;
+    right: 2.9375rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.input:focus + .input__message{
+    display: none;
+}
+
+.input__error + .input__message{
+    display: inline;
+    color: $red;
+    position: absolute;
+}
+
+
+
+.input + .input__name{
+    right: 1rem;
+}
+
+
+.label{
+    color: var(--label);
+}
+
+.button{
+    @include body-l;
+    padding: 0.5rem 0;
+    border-radius: 1.25rem;
+    border: none;
+    font-weight: $bold;
 }

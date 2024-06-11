@@ -1,3 +1,5 @@
+@use './variables' as *;
+
 @mixin tablet{
     @media screen and (min-width: 768px) {
         @content;
@@ -13,36 +15,30 @@
 @mixin heading-xl{
     font-size: 1.5rem;
     line-height: 1.25;
-    font-weight: 700;
 }
 
 @mixin heading-l{
     font-size: 1.125rem;
     line-height: 1.28;
-    font-weight: 700;
 }
 
 @mixin heading-m{
     font-size: 0.9375rem;
     line-height: 1.27;
-    font-weight: 700;
 }
 
 @mixin heading-s{
     font-size: 0.75rem;
     line-height: 1.25;
     letter-spacing: 2.4px;
-    font-weight: 700;
 }
 
 @mixin body-l{
     font-size: 0.8125rem;
     line-height: 1.77;
-    font-weight: 500;
 }
 
 @mixin body-m{
     font-size: 0.75rem;
     line-height: 1.25;
-    font-weight: 500;
 }
