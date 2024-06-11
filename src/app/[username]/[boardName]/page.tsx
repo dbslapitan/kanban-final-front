@@ -3,7 +3,7 @@ import Header from "@/ui/header/header";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
-export default async function Username({ params }: { params: {username: string, boardname: string }}){
+export default async function Username({ params }: { params: {username: string, boardName: string }}){
 
     try{
         const { data } = await axios.get(`${URI}/api/v1/preview/boards`);

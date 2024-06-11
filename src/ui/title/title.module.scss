@@ -1,0 +1,27 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.title{
+    @include heading-l;
+
+    &__toggle{
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        border: none;
+        background-color: inherit;
+
+        &::after{
+            content: ' ';
+            height: 0.5rem;
+            width: 0.625rem;
+            background-image: url('../../../public/icons/icon-chevron-down.svg');
+            display: inline-block;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            bottom: 2px;
+            margin-left: 0.5rem;
+        }
+    }
+}
