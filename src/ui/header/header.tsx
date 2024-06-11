@@ -1,6 +1,6 @@
 import Link from "next/link";
 import style from "./header.module.scss";
-import { IBoardNames } from "@/models/BoardNames";
+import { IBoardNames } from "@/models/board-names";
 import Title from "@/ui/title/title";
 import Control from "@/ui/control/control";
 

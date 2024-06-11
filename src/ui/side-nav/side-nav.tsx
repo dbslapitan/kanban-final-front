@@ -4,7 +4,7 @@ import { MouseEvent, useContext, useEffect, useState } from 'react';
 import style from './side-nav.module.scss';
 import { NavContext } from '../provider/provider';
 import { useRouter } from 'next/router';
-import { IBoardNames } from '@/models/BoardNames';
+import { IBoardNames } from '@/models/board-names';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import sun from '/public/icons/icon-light-theme.svg';

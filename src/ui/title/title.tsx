@@ -1,6 +1,6 @@
 'use client';
 
-import { IBoardNames } from "@/models/BoardNames";
+import { IBoardNames } from "@/models/board-names";
 import { useParams } from "next/navigation";
 import style from './title.module.scss';
 import { useContext } from "react";

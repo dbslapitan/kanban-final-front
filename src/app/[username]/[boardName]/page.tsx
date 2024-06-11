@@ -5,17 +5,20 @@ import axios from "axios";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import style from './board.module.scss';
+import Columns from "@/ui/columns/columns";
 
 export default async function Username({ params }: { params: { username: string, boardName: string } }) {
 
     try {
-        const { data } = await axios.get(`${URI}/api/v1/preview/boards`);
+        const { data: boards } = await axios.get(`${URI}/api/v1/preview/boards`);
+        const { data: columns } = await axios.get(`${URI}/api/v1/preview/columns/${params.boardName}`);
 
         return (
             <>
-                <Header boards={data} />
+                <Header boards={boards} />
                 <main className={`${style['main']}`}>
-                    <SideNav boards={data} />
+                    <SideNav boards={boards} />
+                    <Columns columns={columns} />
                 </main>
             </>
         );
