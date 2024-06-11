@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.scss";
 import { plusJakartaSans } from "@/libs/fonts";
+import { Providers } from "@/ui/provider/provider";
 
 export const metadata: Metadata = {
     title: "Kanban | Dirk Brandon Lapitan",
@@ -15,7 +16,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body className={plusJakartaSans.className}>
-                {children}
+                <Providers>
+                    {children}
+                </Providers>
             </body>
         </html>
     );
