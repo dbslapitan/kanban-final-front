@@ -7,7 +7,6 @@ import { MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
 export default function Control({ level, isDisabled }: { level: string, isDisabled: boolean }) {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-    console.log(isOptionsOpen);
 
     useEffect(() => {
 
