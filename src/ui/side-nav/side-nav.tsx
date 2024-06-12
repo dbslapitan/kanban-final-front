@@ -3,10 +3,9 @@
 import { MouseEvent, useContext, useEffect, useState } from 'react';
 import style from './side-nav.module.scss';
 import { NavContext } from '../provider/provider';
-import { useRouter } from 'next/router';
 import { IBoardNames } from '@/models/board-names';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import sun from '/public/icons/icon-light-theme.svg';
 import moon from '/public/icons/icon-dark-theme.svg';
 import Image from 'next/image';
@@ -21,7 +20,7 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
 
     useEffect(() => setIsMounted(true), []);
 
-    //const router = useRouter();
+    const router = useRouter();
     const { boardName, username } = useParams();
 
     const selected = boards.find(board => board.slugified === boardName);
@@ -44,7 +43,7 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
         if(window.screen.width < 768){
             setIsNavOpen(!isNavOpen);
         }
-        //router.push('/preview/board/add');
+        router.push(`/${username}/add`);
     }
 
     const toggleClick = () => {
