@@ -70,7 +70,7 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
                             })
                         }
                         <li className={`${style['nav__item']}`}>
-                            <button className={`${style['nav__link']} ${style['nav__create']}`} onClick={createBoardClick}>+ Create New Board</button>
+                            <Link href={`/${username}/add`} className={`${style['nav__link']} ${style['nav__create']}`}>+ Create New Board</Link>
                         </li>
                     </ul>
                     <div className={`${style['nav__theme']}`}>
