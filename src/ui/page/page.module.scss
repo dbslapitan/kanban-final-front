@@ -1,0 +1,34 @@
+@use '../../styles/mixins' as *;
+@use '../../styles/variables' as *;
+
+.page{
+    display: flex;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--toggleBackground);
+    
+    &__content{
+        width: 100%;
+        max-width: 30rem;
+        margin: 0 1rem;
+    }
+    
+    &__loader {
+        border: 16px solid $lightGray; /* Light grey */
+        border-top: 16px solid $purple; /* Blue */
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+}

@@ -1,5 +1,13 @@
-export default function AddBoardPage(){
+import { URI } from "@/libs/constants";
+import BoardAction from "@/ui/board-action/board-action";
+import Page from "@/ui/page/page";
+import axios from "axios";
+
+export default async function BoardActionPage({ params }: { params: {username: string, boardName: string}}){
+
+    const { data } = await axios.get(`${URI}/api/v1/${params.username}`);
+
     return (
-        <h1>Add Board Page</h1>
-    )
+        <Page href={`/${params.username}/${data}`} />
+    );
 }
