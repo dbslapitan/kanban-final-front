@@ -3,35 +3,35 @@
 import { URI } from "@/libs/constants";
 import { navigate } from "@/libs/server-actions";
 import { IBoard } from "@/models/board";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, MouseEvent, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import style from "./board-action.module.scss";
 
-export default function BoardAction({ isEdit, data }: {isEdit: boolean, data: null | IBoard}) {
+export default function BoardAction({ isEdit, data }: { isEdit: boolean, data: null | IBoard }) {
 
-    let tempColumns: {key: string, value: string, id?: string}[] = [];
+    let tempColumns: { key: string, value: string, id?: string }[] = [];
     let tempName = '';
 
     const [boardError, setBoardError] = useState("Can't be empty");
 
     const router = useRouter();
-    const { username, boardname  } = useParams();
+    const { username, boardname } = useParams();
 
-    if(isEdit && data?.columns.length && data.name){
+    if (isEdit && data?.columns.length && data.name) {
         tempName = data.name;
         tempColumns = data!.columns.map(column => {
             return {
                 key: uuidv4(),
                 value: column.name,
                 id: column._id,
-                
+
             }
         });
     }
-    else{
-        tempColumns = [{key: uuidv4(), value: '' }];
+    else {
+        tempColumns = [{ key: uuidv4(), value: '' }];
     }
 
     const [columns, setColumns] = useState(tempColumns);
@@ -55,50 +55,53 @@ export default function BoardAction({ isEdit, data }: {isEdit: boolean, data: nu
 
     const onSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
-        
-        if(isEdit){
+
+        if (isEdit) {
             const mappedColumns = columns.map(column => {
-                if(column.id){
+                if (column.id) {
                     return {
                         id: column.id,
                         name: column.value
                     };
                 }
-                else{
+                else {
                     return {
                         name: column.value
                     };
                 }
             });
-            try{
+            try {
                 // const {status} = await axios.patch(`${URI}/preview/board/edit/${boardId}`, { name, columns: mappedColumns});
                 // navigate(`/preview/board/${boardId}`);
             }
-            catch(e){
+            catch (e) {
                 console.error(e);
                 navigate('/preview/notfound');
             }
         }
-        else{
+        else {
             const body = {
                 name,
                 columns: columns.map(column => column.value)
             };
-            if(boardError !== "Can't be empty"){
+            if (boardError !== "Can't be empty") {
                 setBoardError("Can't be empty");
-            } 
-            if(name && columns.every(column => !!column.value)){
-                try{
-                    const { status, data } = await axios.post(`${URI}/api/v1/preview/board/`, body, {validateStatus: status => status >= 200 && status < 300 || status === 400});
-                    if(status === 400){
+            }
+            if (name && columns.every(column => !!column.value)) {
+                try {
+                    const { data } = await axios.post(`${URI}/api/v1/preview/board/`, body);
+                    navigate(`/${username}/${data}`);
+                }
+                catch (e) {
+                    if (axios.isAxiosError(e)) {
+                        if (e.response?.status === 400) {
                             setBoardError("Board already exist");
+                        }
                     }
                     else{
-                        navigate(`/${username}/${data}`);
+                        console.error(e);
+                        router.back();
                     }
-                }
-                catch(e){
-                    router.back();
                 }
             }
         }
@@ -106,7 +109,7 @@ export default function BoardAction({ isEdit, data }: {isEdit: boolean, data: nu
     }
 
     const nameOnChange = (e: ChangeEvent) => {
-        if(boardError !== "Can't be empty"){
+        if (boardError !== "Can't be empty") {
             setBoardError("Can't be empty");
         }
         setName((e.target as HTMLInputElement).value);
@@ -154,7 +157,7 @@ export default function BoardAction({ isEdit, data }: {isEdit: boolean, data: nu
                 }
                 <button type='button' className={`button ${style['columns__button']}`} onClick={addColumnHandler}>+Add New Column</button>
             </ul>
-            <button className={`button ${style['add__submit']}`} type='submit'>{ isEdit ? 'Save Changes': 'Create New Board'}</button>
+            <button className={`button ${style['add__submit']}`} type='submit'>{isEdit ? 'Save Changes' : 'Create New Board'}</button>
         </form>
     );
 }
