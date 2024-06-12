@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import style from './control.module.scss';
 import { MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 export default function Control({ level, isDisabled }: { level: string, isDisabled: boolean }) {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-    const path = usePathname();
+    const { username, boardName } = useParams();
 
     useEffect(() => {
 
@@ -31,28 +31,19 @@ export default function Control({ level, isDisabled }: { level: string, isDisabl
         setIsOptionsOpen(!isOptionsOpen);
     }
 
-    if (level === "Task") {
-        // return (
-        //     <ul className={`${style["options"]}`}>
-        //         <li>
-        //             <button className={`${style["options__option"]} ${style["options__option--edit"]}`} onClick={(e) => handleClick(e, 'edit')}>{`Edit ${level}`}</button>
-        //         </li>
-        //         <li>
-        //             <button className={`${style["options__option"]} ${style["options__option--delete"]}`}  onClick={(e) => handleClick(e, 'delete')}>{`Delete ${level}`}</button>
-        //         </li>
-        //     </ul>
-        // );
-    }
-    else {
-        return (
-            <ul className={`${style["options"]}`}>
-                <li>
-                    <Link href={`${path}/edit`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`}>{`Edit ${level}`}</Link>
-                </li>
-                <li>
-                    <Link href={`${path}/delete`} className={`${style["options__option"]} ${style["options__option--delete"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Delete ${level}`}</Link>
-                </li>
-            </ul>
-        );
-    }
+    return (
+        <>
+            <div className={`${style["control"]}`}>
+                <button className={`${style["control__ellipsis"]}`} onClick={toggleOptions}></button>
+                <ul className={`${style["options"]} ${isOptionsOpen ? style["options--show"] : ""}`}>
+                    <li>
+                        <Link href={`#`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`}>{`Edit ${level}`}</Link>
+                    </li>
+                    <li>
+                        <Link href={`#`} className={`${style["options__option"]} ${style["options__option--delete"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Delete ${level}`}</Link>
+                    </li>
+                </ul>
+            </div>
+        </>
+    );
 }
