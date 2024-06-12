@@ -1,5 +1,4 @@
 import { URI } from "@/libs/constants";
-import BoardAction from "@/ui/board-action/board-action";
 import Page from "@/ui/page/page";
 import axios from "axios";
 
