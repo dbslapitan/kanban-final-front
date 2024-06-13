@@ -2,15 +2,17 @@
 
 import { ReactNode, useEffect } from 'react';
 import style from './page.module.scss';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
-export default function Page({ href }: { href: string }){
+export default function Page({ href }: { href: string}){
 
     const router = useRouter();
+    const path = usePathname();
+
     useEffect(() => {
         router.replace(href);
         return () => {
-            router.replace(`/preview/add`)
+            router.push(`${path}`);
         }
     });
 
