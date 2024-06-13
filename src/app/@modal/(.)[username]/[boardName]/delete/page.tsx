@@ -9,7 +9,7 @@ export default async function DeleteBoardModal({params}: {params: {username: str
 
     return(
         <Modal>
-            <Delete board={board}/>
+            <Delete data={board}/>
         </Modal>
     );
 }
