@@ -7,12 +7,12 @@ import Link from "next/link";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
-export default async function Username() {
+export default async function Username({params}: {params: {username: string}}) {
 
     let boardname = '';
 
     try {
-        const { status, data } = await axios.get(`${URI}/api/v1/preview`);
+        const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`);
         if (status === 200) {
             boardname = data;
         }
@@ -25,7 +25,7 @@ export default async function Username() {
                         {
                             <div className={`${style['main__page']} ${!data.length ? style["main__page--show"] : ''}`}>
                                 <p className={`${style['main__text']}`}>You don{`'`}t have a board. Create a new board to get started.</p>
-                                <Link className={`button ${style['main__add']}`} href={'/preview/board/add'}>+ Add New Board</Link>
+                                <Link className={`button ${style['main__add']}`} href={`/${params.username}/add`}>+ Create New Board</Link>
                             </div>
                         }
                     </main>

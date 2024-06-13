@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import style from './control.module.scss';
 import { MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 
 export default function Control({ level, isDisabled }: { level: string, isDisabled: boolean }) {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const { username, boardName } = useParams();
+    const path = usePathname();
 
     useEffect(() => {
 
@@ -37,10 +38,10 @@ export default function Control({ level, isDisabled }: { level: string, isDisabl
                 <button className={`${style["control__ellipsis"]}`} onClick={toggleOptions}></button>
                 <ul className={`${style["options"]} ${isOptionsOpen ? style["options--show"] : ""}`}>
                     <li>
-                        <Link href={`#`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`}>{`Edit ${level}`}</Link>
+                        <Link href={`/${username}/${boardName}/edit`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`}>{`Edit ${level}`}</Link>
                     </li>
                     <li>
-                        <Link href={`#`} className={`${style["options__option"]} ${style["options__option--delete"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Delete ${level}`}</Link>
+                        <Link href={`/${username}/${boardName}/delete`} className={`${style["options__option"]} ${style["options__option--delete"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Delete ${level}`}</Link>
                     </li>
                 </ul>
             </div>
