@@ -56,7 +56,7 @@ export default function Delete({ data }: {data: IBoardNames | ITask}){
     return(
         <section className={`${style['delete']}`}>
             <h1 className={`${style['delete__title']}`}>Delete this board?</h1>
-            <p className={`${style['delete__description']}`}>Are you sure you want to delete the &apos;{!!task ? (data as ITask).title : (data as IBoardNames).name}&apos; {task ? 'task and its subtasks': 'board'}? This action {task ? '' : 'will remove all columns and tasks and'} cannot be reversed.</p>
+            <p className={`${style['delete__description']}`}>Are you sure you want to delete the &apos;{!!task ? (data as ITask).title : (data as IBoardNames).name}&apos; {!!task ? 'task and its subtasks': 'board'}? This action {!!task ? '' : 'will remove all columns and tasks and'} cannot be reversed.</p>
             <button className={`button ${style['delete__action']} ${style['delete__action--red']}`} onClick={deleteHandler}>Delete</button>
             <button className={`button ${style['delete__action']}`} onClick={cancelHandler}>Cancel</button>
         </section>
