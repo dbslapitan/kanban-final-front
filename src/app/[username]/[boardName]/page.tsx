@@ -2,7 +2,6 @@ import { URI } from "@/libs/constants";
 import Header from "@/ui/header/header";
 import SideNav from "@/ui/side-nav/side-nav";
 import axios from "axios";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import style from './board.module.scss';
 import Columns from "@/ui/columns/columns";
