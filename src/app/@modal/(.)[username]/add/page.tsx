@@ -4,7 +4,7 @@ import Modal from "@/ui/modal/modal";
 export default function AddModal(){
     return(
         <Modal>
-            <BoardAction isEdit={false} data={null}/>
+            <BoardAction />
         </Modal>
     );
 }

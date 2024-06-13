@@ -9,7 +9,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import style from "./board-action.module.scss";
 
-export default function BoardAction({ isEdit, data }: { isEdit: boolean, data: null | IBoard }) {
+export default function BoardAction({ data = null }: { data?: null | IBoard }) {
 
     let tempColumns: { key: string, value: string, id?: string }[] = [];
     let tempName = '';
@@ -19,9 +19,9 @@ export default function BoardAction({ isEdit, data }: { isEdit: boolean, data: n
     const router = useRouter();
     const { username, boardname } = useParams();
 
-    if (isEdit && data?.columns.length && data.name) {
+    if (data) {
         tempName = data.name;
-        tempColumns = data!.columns.map(column => {
+        tempColumns = data.columns.map(column => {
             return {
                 key: uuidv4(),
                 value: column.name,
@@ -56,7 +56,7 @@ export default function BoardAction({ isEdit, data }: { isEdit: boolean, data: n
     const onSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
 
-        if (isEdit) {
+        if (data) {
             const mappedColumns = columns.map(column => {
                 if (column.id) {
                     return {
@@ -123,7 +123,7 @@ export default function BoardAction({ isEdit, data }: { isEdit: boolean, data: n
 
     return (
         <form className={`${style['add']}`} onSubmit={onSubmitHandler} ref={formRef}>
-            <h1 className={`${style['add__header']}`}>{isEdit ? 'Edit' : 'Add New'} Board</h1>
+            <h1 className={`${style['add__header']}`}>{data ? 'Edit' : 'Add New'} Board</h1>
             <label className={`label ${style['add__label']}`} htmlFor="boardName">Board Name</label>
             <div className='input-container'>
                 <input
@@ -157,7 +157,7 @@ export default function BoardAction({ isEdit, data }: { isEdit: boolean, data: n
                 }
                 <button type='button' className={`button ${style['columns__button']}`} onClick={addColumnHandler}>+Add New Column</button>
             </ul>
-            <button className={`button ${style['add__submit']}`} type='submit'>{isEdit ? 'Save Changes' : 'Create New Board'}</button>
+            <button className={`button ${style['add__submit']}`} type='submit'>{data ? 'Save Changes' : 'Create New Board'}</button>
         </form>
     );
 }
