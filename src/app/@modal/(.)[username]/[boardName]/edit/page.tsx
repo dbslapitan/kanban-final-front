@@ -10,6 +10,7 @@ export default async function EditBoardModal({params}: {params: {boardName: stri
 
     try{
         const {data: board} = await axios.get(`${URI}/api/v1/preview/board/edit/${params.boardName}`);
+        console.log(board);
     
         return (
             <Modal>

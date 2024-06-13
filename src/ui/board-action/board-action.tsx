@@ -14,6 +14,8 @@ export default function BoardAction({ data = null }: { data?: null | IBoard }) {
     let tempColumns: { key: string, value: string, id?: string }[] = [];
     let tempName = '';
 
+    console.log(data)
+
     const [boardError, setBoardError] = useState("Can't be empty");
 
     const router = useRouter();
@@ -60,7 +62,7 @@ export default function BoardAction({ data = null }: { data?: null | IBoard }) {
             const mappedColumns = columns.map(column => {
                 if (column.id) {
                     return {
-                        id: column.id,
+                        _id: column.id,
                         name: column.value
                     };
                 }
@@ -71,12 +73,12 @@ export default function BoardAction({ data = null }: { data?: null | IBoard }) {
                 }
             });
             try {
-                // const {status} = await axios.patch(`${URI}/preview/board/edit/${boardId}`, { name, columns: mappedColumns});
-                // navigate(`/preview/board/${boardId}`);
+                const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/preview/board/edit/${data._id}`, { name, columns: mappedColumns});
+                navigate(`/${username}/${updatedBoard}`);
             }
             catch (e) {
                 console.error(e);
-                navigate('/preview/notfound');
+                navigate('/');
             }
         }
         else {
