@@ -1,6 +1,8 @@
-export default async function EditBoardPage(){
+import Page from "@/ui/page/page";
+
+export default async function EditBoardPage({ params }: { params: { username: string, boardName: string } }){
  
     return (
-        <h1>Edit Board Page</h1>
+        <Page href={`/${params.username}/${params.boardName}`} />
     );
 }
