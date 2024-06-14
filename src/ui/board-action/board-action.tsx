@@ -14,8 +14,6 @@ export default function BoardAction({ data = null }: { data?: null | IBoard }) {
     let tempColumns: { key: string, value: string, id?: string }[] = [];
     let tempName = '';
 
-    console.log(data)
-
     const [boardError, setBoardError] = useState("Can't be empty");
 
     const router = useRouter();

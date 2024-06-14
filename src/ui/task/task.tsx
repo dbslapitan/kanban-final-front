@@ -17,7 +17,7 @@ export default function Task({ task }: { task: ITask }){
     }, 0);
     
     return(
-        <Link href={`/${username}/${boardName}/${task._id}`} className={`${style['task']}`}>
+        <Link href={`/${username}/${boardName}/task/${task._id}`} className={`${style['task']}`}>
             <h3 className={`${style['task__title']}`}>{ task.title }</h3>
             <p className={`${style['task__subtasks']}`}>{ `${completed} of ${task.subtasks.length} subtasks` }</p>
         </Link>
