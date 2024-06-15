@@ -34,7 +34,7 @@ export default function Delete({ data }: { data: IBoardNames | ITask }) {
         else {
             try {
                 await axios.delete(`${URI}/api/v1/preview/board/${data._id}`);
-                navigate(`/${username}/${boardName}/task/${taskId}`);
+                navigate(`/`);
             }
             catch (e) {
                 console.error(e);
