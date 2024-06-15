@@ -5,12 +5,8 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 
 export default async function EditBoardModal({params}: {params: {boardName: string}}){
-
-    console.log(params.boardName);
-
     try{
         const {data: board} = await axios.get(`${URI}/api/v1/preview/board/edit/${params.boardName}`);
-        console.log(board);
     
         return (
             <Modal>

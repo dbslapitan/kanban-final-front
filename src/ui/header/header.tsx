@@ -4,7 +4,7 @@ import { IBoardNames } from "@/models/board-names";
 import Title from "@/ui/title/title";
 import Control from "@/ui/control/control";
 
-export default async function Header({ boards }: { boards: IBoardNames[] }) {
+export default async function Header({ boards, params  }: { boards: IBoardNames[], params:  { username: string, boardName: string, taskId: string } }) {
 
     return (
         <header className={`${style["header"]}`}>
@@ -13,7 +13,7 @@ export default async function Header({ boards }: { boards: IBoardNames[] }) {
             </div>
             <div className={`${style['header__right']}`}>
                 <Title boards={boards} />
-                <Link className={`${style['add']} ${!boards.length ? style['add--disabled'] : ''}`} href={`#`}>
+                <Link className={`${style['add']} ${!boards.length ? style['add--disabled'] : ''}`} href={`/${params.username}/${params.boardName}/add`}>
                     <span className={`${style['add__text']}`}>Add New Task</span>
                 </Link>
                 <Control level="Board" isDisabled={ !!!boards.length }/>

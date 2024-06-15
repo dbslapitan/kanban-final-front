@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import style from './board.module.scss';
 import Columns from "@/ui/columns/columns";
 
-export default async function Username({ params }: { params: { username: string, boardName: string } }) {
+export default async function Username({ params }: { params: { username: string, boardName: string, taskId: string } }) {
 
     try {
         const { data: boards } = await axios.get(`${URI}/api/v1/preview/boards`);
@@ -14,7 +14,7 @@ export default async function Username({ params }: { params: { username: string,
 
         return (
             <>
-                <Header boards={boards} />
+                <Header boards={boards} params={params} />
                 <main className={`${style['main']}`}>
                     <SideNav boards={boards} />
                     <Columns columns={columns} />

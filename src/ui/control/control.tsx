@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import style from './control.module.scss';
 import { MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
-import { useParams, usePathname } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 export default function Control({ level, isDisabled }: { level: string, isDisabled: boolean }) {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-    const { username, boardName } = useParams();
-    const path = usePathname();
+    const { username, boardName, taskId } = useParams();
+    const router = useRouter();
 
     useEffect(() => {
 
@@ -30,6 +30,26 @@ export default function Control({ level, isDisabled }: { level: string, isDisabl
     const toggleOptions = (e: ReactMouseEvent) => {
         e.stopPropagation();
         setIsOptionsOpen(!isOptionsOpen);
+    }
+
+    const handleClick = (e: ReactMouseEvent, segment: string) => {
+        router.replace(`/${username}/${boardName}/task/${taskId}/${segment}`)
+    }
+
+    if (level === "Task") {
+        return (
+            <div className={`${style["control"]}`}>
+                <button className={`${style["control__ellipsis"]}`} onClick={toggleOptions}></button>
+                <ul className={`${style["options"]} ${isOptionsOpen ? style["options--show"] : ""}`}>
+                <li>
+                    <button className={`${style["options__option"]} ${style["options__option--edit"]}`} onClick={(e) => handleClick(e, 'edit')}>{`Edit ${level}`}</button>
+                </li>
+                <li>
+                    <button className={`${style["options__option"]} ${style["options__option--delete"]}`}  onClick={(e) => handleClick(e, 'delete')}>{`Delete ${level}`}</button>
+                </li>
+            </ul>
+            </div>
+        );
     }
 
     return (
