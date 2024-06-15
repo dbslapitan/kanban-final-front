@@ -10,6 +10,7 @@ import sun from '/public/icons/icon-light-theme.svg';
 import moon from '/public/icons/icon-dark-theme.svg';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
+import { useUser } from '@auth0/nextjs-auth0/client';
 
 export default function SideNav({ boards }: { boards: IBoardNames[] }){
 
@@ -17,6 +18,10 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
     const [isShrunken, setIsShrunken] = useState(false);
     const [isMounted, setIsMounted] = useState(false);
     const { resolvedTheme, setTheme } = useTheme();
+
+    const user = useUser();
+
+    console.log(user);
 
     useEffect(() => setIsMounted(true), []);
 
@@ -81,6 +86,7 @@ export default function SideNav({ boards }: { boards: IBoardNames[] }){
                         <Image className={`${!isMounted ? style['nav--opaque'] : ''}`} src={moon} alt='moon icon for theme'></Image>
                     </div>
                     <button className={`${style['nav__hide']}`} onClick={toggleShrink}>Hide Sidebar</button>
+                    {!user.user ? <a href={'/api/auth/login'}>Login</a> : <a href={'/api/auth/logout'}>Logout</a>}
                 </nav>
             </div>
             <button className={`${style['nav__unhide']} ${isShrunken ? style['nav__unhide--show'] : ''}`} onClick={toggleShrink}></button>

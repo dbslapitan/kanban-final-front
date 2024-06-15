@@ -11,8 +11,6 @@ const URI = process.env.NEXT_PUBLIC_URI;
 export default async function Username({params}: {params: {username: string}}) {
 
     let boardname = '';
-    const session = await getSession();
-    console.log(session);
 
     try {
         const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`);
