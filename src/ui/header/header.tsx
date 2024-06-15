@@ -4,7 +4,7 @@ import { IBoardNames } from "@/models/board-names";
 import Title from "@/ui/title/title";
 import Control from "@/ui/control/control";
 
-export default async function Header({ boards, params  }: { boards: IBoardNames[], params:  { username: string, boardName: string, taskId: string } }) {
+export default async function Header({ boards, params  }: { boards: IBoardNames[], params:  { username: string, boardName?: string, taskId?: string } }) {
 
     return (
         <header className={`${style["header"]}`}>

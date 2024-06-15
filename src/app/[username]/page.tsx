@@ -4,12 +4,15 @@ import axios from "axios";
 import { notFound, redirect } from "next/navigation";
 import style from './[boardName]/board.module.scss';
 import Link from "next/link";
+import { getSession } from "@auth0/nextjs-auth0";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
 export default async function Username({params}: {params: {username: string}}) {
 
     let boardname = '';
+    const session = await getSession();
+    console.log(session);
 
     try {
         const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`);
@@ -19,7 +22,7 @@ export default async function Username({params}: {params: {username: string}}) {
         else if (status === 204) {
             return (
                 <>
-                    <Header boards={[]} />
+                    <Header boards={[]} params={params} />
                     <main className={`${style['main']}`}>
                         <SideNav boards={[]} />
                         {
