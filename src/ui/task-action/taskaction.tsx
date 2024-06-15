@@ -16,6 +16,7 @@ export default function TaskAction({ columns, task = null }: { columns: IColumn[
 
     const {isRefresh} = useContext(ModalContext);
     const router = useRouter();
+    const { username, boardId, taskId } = useParams();
 
     let tempSubtasks = [({ isCompleted: false, _id: uuidv4(), title: '' } as ISubTask)];
     let tempTitle = '';
@@ -58,13 +59,7 @@ export default function TaskAction({ columns, task = null }: { columns: IColumn[
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        let temp = [];
-        if(task){
-            temp = subtasks;
-        }
-        else{
-            temp = subtasks.map(subtask => { return { title: subtask.title, isCompleted: subtask.isCompleted } })
-        }
+        let temp = subtasks.map(subtask => { return { title: subtask.title, isCompleted: subtask.isCompleted } });
         const body = {
             title,
             description,
@@ -75,12 +70,12 @@ export default function TaskAction({ columns, task = null }: { columns: IColumn[
         if(title && subtasks.every(subtask => !!subtask.title)){
             try{
                 if(task){
-                    const {data: taskId} = await axios.patch(`${URI}/preview/single/task/${task._id}`, body);
+                    await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, body);
                     (isRefresh as MutableRefObject<boolean>).current = true;
                     router.back();
                 }
                 else{
-                    const {data: taskId} = await axios.post(`${URI}/preview/task`, body);
+                    await axios.post(`${URI}/api/v1/${username}/task`, body);
                     (isRefresh as MutableRefObject<boolean>).current = true;
                     router.back();
                 }
@@ -124,8 +119,7 @@ export default function TaskAction({ columns, task = null }: { columns: IColumn[
             </div>
             <label className={`${style['action__label']}`} htmlFor="taskDescription">Description</label>
             <div className={`input-container ${style['action__container']}`}>
-                <textarea name='taskDescription' className={`input ${style['action__input']} ${plusJakartaSans.className} ${isSubmitted && !description ? 'input__error' : ''}`} rows={4} id="taskDescription" onChange={handleDescription} placeholder={`e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little.`} defaultValue={description}></textarea>
-                <span className={`${style['action__message']} ${isSubmitted && !description ? style['action__error'] : null}`}>Can&apos;t be empty</span>
+                <textarea name='taskDescription' className={`input ${style['action__input']} ${plusJakartaSans.className}`} rows={4} id="taskDescription" onChange={handleDescription} placeholder={`e.g. It's always good to take a break. This 15 minute break will recharge the batteries a little.`} defaultValue={description}></textarea>
             </div>
 
             <h2 className={`${style['action__label']}`}>Subtasks</h2>
