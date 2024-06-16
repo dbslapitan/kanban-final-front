@@ -5,12 +5,15 @@ import axios from "axios";
 import { notFound } from "next/navigation";
 import style from './board.module.scss';
 import Columns from "@/ui/columns/columns";
+import { getSession } from "@auth0/nextjs-auth0";
 
 export default async function Username({ params }: { params: { username: string, boardName: string, taskId: string } }) {
 
     try {
         const { data: boards } = await axios.get(`${URI}/api/v1/preview/boards`);
         const { data: columns } = await axios.get(`${URI}/api/v1/preview/columns/${params.boardName}`);
+        const session = await getSession();
+        console.log('boardName', session);
 
         return (
             <>
