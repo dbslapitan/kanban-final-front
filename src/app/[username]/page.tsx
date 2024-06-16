@@ -14,6 +14,8 @@ export default async function Username({params}: {params: {username: string}}) {
 
     try {
         const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`);
+        const session = await getSession(); 
+
         if (status === 200) {
             boardname = data;
         }
@@ -22,7 +24,7 @@ export default async function Username({params}: {params: {username: string}}) {
                 <>
                     <Header boards={[]} params={params} />
                     <main className={`${style['main']}`}>
-                        <SideNav boards={[]} />
+                        <SideNav boards={[]} user={session?.user}/>
                         {
                             <div className={`${style['main__page']} ${!data.length ? style["main__page--show"] : ''}`}>
                                 <p className={`${style['main__text']}`}>You don{`'`}t have a board. Create a new board to get started.</p>
@@ -39,7 +41,7 @@ export default async function Username({params}: {params: {username: string}}) {
         notFound();
     }
     if (boardname) {
-        redirect(`/preview/${boardname}`);
+        redirect(`/${params.username}/${boardname}`);
     }
 
     return null;

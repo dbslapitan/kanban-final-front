@@ -78,12 +78,13 @@
     }
 
     &__status{
-        @include body-m;
+        @include heading-m;
         margin-left: 1rem;
         margin-top: 0.5rem;
         text-align: center;
 
         &--red{
+            @include body-l;
             color: $red;
         }
     }
