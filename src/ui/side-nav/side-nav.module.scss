@@ -70,6 +70,24 @@
         }
     }
 
+    &__logged{
+        @include body-l;
+        margin-top: 0.5rem;
+        margin-left: 1rem;
+        text-align: center;
+    }
+
+    &__status{
+        @include body-m;
+        margin-left: 1rem;
+        margin-top: 0.5rem;
+        text-align: center;
+
+        &--red{
+            color: $red;
+        }
+    }
+
     &__link{
         @include heading-m;
         font-weight: 700;

@@ -13,13 +13,12 @@ export default async function Username({ params }: { params: { username: string,
         const { data: boards } = await axios.get(`${URI}/api/v1/preview/boards`);
         const { data: columns } = await axios.get(`${URI}/api/v1/preview/columns/${params.boardName}`);
         const session = await getSession();
-        console.log('boardName', session);
 
         return (
             <>
-                <Header boards={boards} params={params} />
+                <Header boards={boards} params={params}/>
                 <main className={`${style['main']}`}>
-                    <SideNav boards={boards} />
+                    <SideNav boards={boards}  user={session?.user} />
                     <Columns columns={columns} />
                 </main>
             </>

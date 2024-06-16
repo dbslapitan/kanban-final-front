@@ -3,6 +3,7 @@ import style from "./header.module.scss";
 import { IBoardNames } from "@/models/board-names";
 import Title from "@/ui/title/title";
 import Control from "@/ui/control/control";
+import { Claims } from "@auth0/nextjs-auth0";
 
 export default async function Header({ boards, params  }: { boards: IBoardNames[], params:  { username: string, boardName?: string, taskId?: string } }) {
 
