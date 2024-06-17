@@ -11,7 +11,7 @@ import { ModalContext } from '../modal/modal';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
-export default function ViewTask({ task, columns }: { task: ITask, columns: IColumn[] }) {
+export default function ViewTask({ task, columns, accessToken }: { task: ITask, columns: IColumn[], accessToken: string }) {
 
     const [newTask, setNewTask] = useState(task);
     const [selected, setSelected] = useState(task.status);
