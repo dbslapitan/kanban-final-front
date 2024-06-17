@@ -8,8 +8,10 @@ import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, MouseEvent, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import style from "./board-action.module.scss";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { getAccessToken } from "@auth0/nextjs-auth0";
 
-export default function BoardAction({ data = null }: { data?: null | IBoard }) {
+export default function BoardAction({ data = null, accessToken }: { data?: null | IBoard, accessToken: string | undefined }) {
 
     let tempColumns: { key: string, value: string, id?: string }[] = [];
     let tempName = '';
@@ -89,7 +91,7 @@ export default function BoardAction({ data = null }: { data?: null | IBoard }) {
             }
             if (name && columns.every(column => !!column.value)) {
                 try {
-                    const { data } = await axios.post(`${URI}/api/v1/preview/board/`, body);
+                    const { data } = await axios.post(`${URI}/api/v1/${username}/board/`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
                     navigate(`/${username}/${data}`);
                 }
                 catch (e) {
