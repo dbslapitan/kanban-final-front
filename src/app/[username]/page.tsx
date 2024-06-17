@@ -11,10 +11,14 @@ const URI = process.env.NEXT_PUBLIC_URI;
 export default async function Username({params}: {params: {username: string}}) {
 
     let boardname = '';
+    const session = await getSession(); 
 
     try {
-        const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`);
-        const session = await getSession(); 
+        const header = {
+            Authorization: `Bearer ${session?.accessToken}`
+        }
+
+        const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`, {headers: header});
 
         if (status === 200) {
             boardname = data;
