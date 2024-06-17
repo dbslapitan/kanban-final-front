@@ -11,7 +11,7 @@ const URI = process.env.NEXT_PUBLIC_URI;
 export default async function Username({params}: {params: {username: string}}) {
 
     let boardname = '';
-    const session = await getSession(); 
+    const session = await getSession();
 
     try {
         const header = {

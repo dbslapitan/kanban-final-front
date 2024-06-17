@@ -11,7 +11,7 @@ export default async function Username({ params }: { params: { username: string,
 
     try {
         const { data: boards } = await axios.get(`${URI}/api/v1/${params.username}/boards`);
-        const { data: columns } = await axios.get(`${URI}/api/v1/{${params.username}}/columns/${params.boardName}`);
+        const { data: columns } = await axios.get(`${URI}/api/v1/${params.username}/columns/${params.boardName}`);
         const session = await getSession();
 
         return (
