@@ -1,6 +1,6 @@
 import BoardAction from "@/ui/board-action/board-action";
 import Modal from "@/ui/modal/modal";
-import { getAccessToken, getSession } from "@auth0/nextjs-auth0";
+import { getSession } from "@auth0/nextjs-auth0";
 
 export default async function AddModal(){
 
