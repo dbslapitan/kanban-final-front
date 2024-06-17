@@ -73,7 +73,7 @@ export default function BoardAction({ data = null, accessToken }: { data?: null 
                 }
             });
             try {
-                const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/preview/board/edit/${data._id}`, { name, columns: mappedColumns});
+                const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/${username}/board/edit/${data._id}`, { name, columns: mappedColumns}, {headers: {Authorization: `Bearer ${accessToken}`}});
                 navigate(`/${username}/${updatedBoard}`);
             }
             catch (e) {
