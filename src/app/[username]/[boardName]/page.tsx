@@ -10,8 +10,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 export default async function Username({ params }: { params: { username: string, boardName: string, taskId: string } }) {
 
     try {
-        const { data: boards } = await axios.get(`${URI}/api/v1/preview/boards`);
-        const { data: columns } = await axios.get(`${URI}/api/v1/preview/columns/${params.boardName}`);
+        const { data: boards } = await axios.get(`${URI}/api/v1/${params.username}/boards`);
+        const { data: columns } = await axios.get(`${URI}/api/v1/{${params.username}}/columns/${params.boardName}`);
         const session = await getSession();
 
         return (
