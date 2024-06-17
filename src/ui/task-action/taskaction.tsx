@@ -12,7 +12,7 @@ import { plusJakartaSans } from '@/libs/fonts';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
-export default function TaskAction({ columns, task = null }: { columns: IColumn[], task?: ITask | null }) {
+export default function TaskAction({ columns, task = null, accessToken }: { columns: IColumn[], task?: ITask | null, accessToken: string }) {
 
     const {isRefresh} = useContext(ModalContext);
     const router = useRouter();
@@ -75,7 +75,7 @@ export default function TaskAction({ columns, task = null }: { columns: IColumn[
                     router.back();
                 }
                 else{
-                    await axios.post(`${URI}/api/v1/${username}/task`, body);
+                    await axios.post(`${URI}/api/v1/${username}/task`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
                     (isRefresh as MutableRefObject<boolean>).current = true;
                     router.back();
                 }
