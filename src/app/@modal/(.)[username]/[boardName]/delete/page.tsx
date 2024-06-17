@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 export default async function DeleteBoardModal({params}: {params: {username: string, boardName: string}}){
 
     try{
-        const {data: board} = await axios.get(`${URI}/api/v1/preview/board/${params.boardName}`);
+        const {data: board} = await axios.get(`${URI}/api/v1/${params.username}/board/${params.boardName}`);
 
         return(
             <Modal>
