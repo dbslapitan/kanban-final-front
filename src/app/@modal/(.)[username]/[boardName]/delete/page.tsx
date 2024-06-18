@@ -10,13 +10,14 @@ import { notFound } from "next/navigation";
 export default async function DeleteBoardModal({params}: {params: {username: string, boardName: string}}){
 
     const session = await getSession();
+    const accessToken = session ? `${session.accessToken}` : '';
 
     try{
         const {data: board} = await axios.get(`${URI}/api/v1/${params.username}/board/${params.boardName}`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});
 
         return(
             <Modal>
-                <Delete data={board}/>
+                <Delete data={board} accessToken={accessToken}/>
             </Modal>
         );
     }

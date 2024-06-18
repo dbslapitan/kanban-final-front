@@ -11,7 +11,7 @@ import { ModalContext } from '../modal/modal';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
-export default function Delete({ data }: { data: IBoardNames | ITask }) {
+export default function Delete({ data, accessToken }: { data: IBoardNames | ITask, accessToken: string }) {
 
     const { taskId, username, boardName } = useParams();
     const router = useRouter();
@@ -22,7 +22,7 @@ export default function Delete({ data }: { data: IBoardNames | ITask }) {
 
         if (taskId) {
             try {
-                const { status } = await axios.delete(`${URI}/api/v1/${username}/task/${taskId}`);
+                const { status } = await axios.delete(`${URI}/api/v1/${username}/task/${taskId}`, {headers: {Authorization: `Bearer ${accessToken}`}});
                 (isRefresh as MutableRefObject<boolean>).current = true;
                 router.back();
             }
@@ -33,7 +33,7 @@ export default function Delete({ data }: { data: IBoardNames | ITask }) {
         }
         else {
             try {
-                await axios.delete(`${URI}/api/v1/preview/board/${data._id}`);
+                await axios.delete(`${URI}/api/v1/${username}/board/${data._id}`, {headers: {Authorization: `Bearer ${accessToken}`}});
                 navigate(`/`);
             }
             catch (e) {
