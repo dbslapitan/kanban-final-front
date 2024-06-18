@@ -31,7 +31,7 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
         setNewTask(taskTemp);
 
         try{
-            const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp);
+            const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
             (isRefresh as MutableRefObject<boolean>).current = true;
         }
         catch(e){
@@ -45,7 +45,7 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
         const taskTemp: ITask = JSON.parse(JSON.stringify(newTask));
         taskTemp.status = id;
         try{
-            const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp);
+            const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
             (isRefresh as MutableRefObject<boolean>).current = true;
         }
         catch(e){

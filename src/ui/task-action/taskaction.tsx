@@ -70,7 +70,7 @@ export default function TaskAction({ columns, task = null, accessToken }: { colu
         if(title && subtasks.every(subtask => !!subtask.title)){
             try{
                 if(task){
-                    await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, body);
+                    await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
                     (isRefresh as MutableRefObject<boolean>).current = true;
                     router.back();
                 }
