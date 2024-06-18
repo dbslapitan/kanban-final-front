@@ -6,6 +6,9 @@
     font-weight: $bold;
     display: flex;
     align-items: center;
+    flex-grow: 1;
+    margin-left: 1rem;
+    min-width: 0;
 
     @include tablet{
         font-size: 1.25rem;
@@ -19,11 +22,16 @@
     &__toggle{
         background-color: unset;
         border: 0;
-        display: flex;
         column-gap: 9px;
         font-size: inherit;
         font-weight: inherit;
         line-height: inherit;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin-right: 2rem;
+        padding-right: 1rem;
+        position: relative;
 
         @include tablet{
             display: none;
@@ -31,8 +39,8 @@
     
         &::after{
             content: url('../../../public/icons/icon-chevron-down.svg');
-            position: relative;
-            bottom: 3px;
+            position: absolute;
+            right: 0;
         }
     
         &--up{
