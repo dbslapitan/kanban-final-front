@@ -66,7 +66,9 @@ export default function SideNav({ boards, user }: { boards: IBoardNames[], user:
                             boards.map(board => {
                                 return (
                                     <li key={board._id} onClick={itemClick}>
-                                        <Link className={`${style['nav__link']} ${selected?.slugified === board.slugified ? style['nav__link--selected'] : ''}`} href={`/${username}/${board.slugified}`}>{board.name}</Link>
+                                        <Link className={`${style['nav__link']} ${selected?.slugified === board.slugified ? style['nav__link--selected'] : ''}`} href={`/${username}/${board.slugified}`}>
+                                        <span className={`${style['nav__text']}`}>{board.name}</span>
+                                        </Link>
                                     </li>
                                 );
                             })

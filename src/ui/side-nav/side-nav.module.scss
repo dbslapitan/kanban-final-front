@@ -89,18 +89,21 @@
         }
     }
 
+    &__text{
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
     &__link{
         @include heading-m;
         font-weight: 700;
         color: inherit;
         display: flex;
         width: 100%;
-        text-overflow: ellipsis;
         padding: 0.875rem 1rem 0.875rem 1.5rem;
         border-radius: 0 100px 100px 0;
         max-width: 14.75rem;
-        overflow: hidden;
-        white-space: nowrap;
 
         &:hover{
             background-color: $lightPurple;
