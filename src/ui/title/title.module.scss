@@ -12,6 +12,7 @@
 
     @include tablet{
         font-size: 1.25rem;
+        display: none;
     }
 
     @include desktop{
@@ -32,15 +33,16 @@
         margin-right: 2rem;
         padding-right: 1rem;
         position: relative;
+        top: 3px;
 
         @include tablet{
-            display: none;
         }   
     
         &::after{
             content: url('../../../public/icons/icon-chevron-down.svg');
             position: absolute;
             right: 0;
+            bottom: 3px;
         }
     
         &--up{
@@ -52,9 +54,18 @@
 
     &__text{
         display: none;
+        @include heading-l;
+        flex-grow: 1;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        align-content: center;
+        min-width: 0;
+        margin-right: 3rem;
 
         @include tablet{
             display: unset;
+            position: relative;
         }
     }
 }

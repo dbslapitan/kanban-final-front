@@ -38,6 +38,7 @@
         @include tablet{
             border-bottom: var(--border);
             padding: 1rem 1.25rem 1rem 1.5rem;
+            max-width: calc(100vw - 16.25rem);
         }
 
         @include desktop{
@@ -71,6 +72,7 @@
 
     @include tablet{
         background-image: none;
+        min-width: 10.25rem;
     }
 
     &--disabled{
