@@ -2,14 +2,17 @@
 
 import Link from 'next/link';
 import style from './control.module.scss';
-import { MouseEvent as ReactMouseEvent, useEffect, useState } from 'react';
+import { MutableRefObject, MouseEvent as ReactMouseEvent, useContext, useEffect, useState } from 'react';
 import { useParams, usePathname, useRouter } from 'next/navigation';
+import { ModalContext } from '../modal/modal';
 
 export default function Control({ level, isDisabled }: { level: string, isDisabled: boolean }) {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const { username, boardName, taskId } = useParams();
     const router = useRouter();
+
+    const {isRedirect} = useContext(ModalContext);
 
     useEffect(() => {
 
@@ -33,7 +36,10 @@ export default function Control({ level, isDisabled }: { level: string, isDisabl
     }
 
     const handleClick = (e: ReactMouseEvent, segment: string) => {
-        router.replace(`/${username}/${boardName}/task/${taskId}/${segment}`)
+        if(isRedirect){
+            (isRedirect as MutableRefObject<boolean>).current = true;
+        }
+        router.replace(`/${username}/${boardName}/task/${taskId}/${segment}`);
     }
 
     if (level === "Task") {
