@@ -5,14 +5,15 @@ import { getSession } from "@auth0/nextjs-auth0";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
-export default async function EditBoardModal({params}: {params: {boardName: string}}){
+export default async function EditBoardModal({params}: {params: {boardName: string, username: string}}){
     try{
-        const {data: board} = await axios.get(`${URI}/api/v1/preview/board/edit/${params.boardName}`);
         const session = await getSession();
+        const accessToken = session ? `${session.accessToken}` : '';
+        const {data: board} = await axios.get(`${URI}/api/v1/${params.username}/board/edit/${params.boardName}`, {headers: {Authorization: `Bearer ${accessToken}`}});
     
         return (
             <Modal>
-                <BoardAction data={board} accessToken={session?.accessToken}/>
+                <BoardAction data={board} accessToken={accessToken}/>
             </Modal>
         );
     }
