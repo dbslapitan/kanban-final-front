@@ -47,6 +47,17 @@ export default function Editors({accessToken, boardEditors}: {accessToken: strin
                     }
                 </ul>
             </div>
+            <ul className={`${style['editors__editors']}`}>
+                {
+                    editors.map(editor => {
+                        return(
+                            <li>
+
+                            </li>
+                        );
+                    })
+                }
+            </ul>
         </section>
     );
 }
