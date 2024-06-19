@@ -2,6 +2,8 @@
 @use '../../styles/variables' as *;
 
 .editors{
+    position: relative;
+    bottom: 13rem;
     width: 100%;
     padding: 1.5rem;
     background-color: var(--background);
@@ -24,23 +26,36 @@
         position: relative;
     }
 
-    &__message{
-        display: none;
+    &__username{
         @include body-l;
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-20%);
-        color: $red;
+        width: 100%;
+        background-color: inherit;
+        border: none;
+        text-align: left;
+        padding: 1rem;
 
-        &--error{
-            display: unset;
+        &:hover{
+            background-color: $lightPurple;
         }
     }
 
-    &__submit{
-        margin-top: 1rem;
+    &__item{
+        border-bottom: var(--border);
+        
+    }
+
+    &__usernames{
+        display: none;
         width: 100%;
-        background-color: $purple;
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        background-color: var(--background);
+        box-shadow: 0px 10px 20px 0px rgba(54, 78, 126, 0.25);
+        border-radius: 0.5rem;
+        border: var(--border);
+
+        &--show{
+            display: block;
+        }
     }
 }

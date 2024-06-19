@@ -12,7 +12,7 @@ export default async function EditorsPage({params}: {params: {boardName: string,
         console.log(editors);
         return(
             <Modal>
-               <Editors />
+               <Editors accessToken={`${session?.accessToken}`}/>
             </Modal>
         );
     }
