@@ -34,7 +34,7 @@ export default function Delete({ data, accessToken }: { data: IBoardNames | ITas
         else {
             try {
                 await axios.delete(`${URI}/api/v1/${username}/board/${data._id}`, {headers: {Authorization: `Bearer ${accessToken}`}});
-                navigate(`/`);
+                navigate(`/${username}`);
             }
             catch (e) {
                 console.error(e);
