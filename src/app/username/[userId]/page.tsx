@@ -1,7 +1,5 @@
 import Username from "@/ui/username/username";
 import style from "./username.module.scss";
-import { getSession } from "@auth0/nextjs-auth0";
-import { ReactNode } from "react";
 import axios from "axios";
 import { URI } from "@/libs/constants";
 import { notFound, redirect } from "next/navigation";

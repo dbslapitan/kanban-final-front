@@ -67,8 +67,12 @@ export default function Control({ level, isDisabled }: { level: string, isDisabl
                         <Link href={`/${username}/${boardName}/edit`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`}>{`Edit ${level}`}</Link>
                     </li>
                     <li>
+                        <Link href={`/${username}/${boardName}/editors`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Editors`}</Link>
+                    </li>
+                    <li>
                         <Link href={`/${username}/${boardName}/delete`} className={`${style["options__option"]} ${style["options__option--delete"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Delete ${level}`}</Link>
                     </li>
+                    
                 </ul>
             </div>
         </>
