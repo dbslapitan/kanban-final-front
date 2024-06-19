@@ -1,14 +1,14 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, MouseEvent, useState } from 'react';
 import style from './editors.module.scss';
 import { useDebouncedCallback } from 'use-debounce';
 import axios from 'axios';
 import { URI } from '@/libs/constants';
 
-export default function Editors({accessToken}: {accessToken: string}) {
+export default function Editors({accessToken, boardEditors}: {accessToken: string, boardEditors: string[]}) {
 
-    const [editors, setEditors] = useState([]);
+    const [editors, setEditors] = useState(boardEditors);
     const [users, setUsers] = useState([]);
 
     const changeHandler = useDebouncedCallback(async (event: ChangeEvent) => {
@@ -22,6 +22,12 @@ export default function Editors({accessToken}: {accessToken: string}) {
         }
     }, 400);
 
+    const handleClick = async (e: MouseEvent, username: string) => {
+        if(!editors.includes(username)){
+            setEditors([...editors, username]);
+        }
+    };
+
     return (
         <section className={`${style['editors']}`}>
             <h1 className={`${style['editors__title']}`}>Editors:</h1>
@@ -32,7 +38,7 @@ export default function Editors({accessToken}: {accessToken: string}) {
                         users.map((user) => {
                             return(
                                 <li className={`${style['editors__item']}`}>
-                                    <button  className={`${style['editors__username']}`}>
+                                    <button  className={`${style['editors__username']}`} onClick={(e) => handleClick(e, user)}>
                                     {user}
                                     </button>
                                 </li>

@@ -8,11 +8,10 @@ import { notFound } from "next/navigation";
 export default async function EditorsPage({params}: {params: {boardName: string, username: string}}) {
     try{
         const session = await getSession();
-        const {data: editors} = await axios.get(`${URI}/api/v1/${params.username}/board/editors/${params.boardName}`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});
-        console.log(editors);
+        const {data: boardEditors} = await axios.get(`${URI}/api/v1/${params.username}/board/editors/${params.boardName}`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});
         return(
             <Modal>
-               <Editors accessToken={`${session?.accessToken}`}/>
+               <Editors accessToken={`${session?.accessToken}`} boardEditors={boardEditors}/>
             </Modal>
         );
     }
