@@ -3,13 +3,11 @@
 import { URI } from "@/libs/constants";
 import { navigate } from "@/libs/server-actions";
 import { IBoard } from "@/models/board";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, MouseEvent, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import style from "./board-action.module.scss";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { getAccessToken } from "@auth0/nextjs-auth0";
 
 export default function BoardAction({ data = null, accessToken }: { data?: null | IBoard, accessToken: string | undefined }) {
 
@@ -73,8 +71,10 @@ export default function BoardAction({ data = null, accessToken }: { data?: null 
                 }
             });
             try {
-                const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/${username}/board/edit/${data._id}`, { name, columns: mappedColumns}, {headers: {Authorization: `Bearer ${accessToken}`}});
-                navigate(`/${username}/${updatedBoard}`);
+                if (name && columns.every(column => !!column.value)) {
+                    const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/${username}/board/edit/${data._id}`, { name, columns: mappedColumns}, {headers: {Authorization: `Bearer ${accessToken}`}});
+                    navigate(`/${username}/${updatedBoard}`);
+                }
             }
             catch (e) {
                 console.error(e);
