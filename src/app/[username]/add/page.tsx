@@ -2,6 +2,7 @@ import { URI } from "@/libs/constants";
 import Page from "@/ui/page/page";
 import { getSession } from "@auth0/nextjs-auth0";
 import axios from "axios";
+import { notFound } from "next/navigation";
 
 export default async function BoardActionPage({ params }: { params: {username: string, boardName: string}}){
 
@@ -16,13 +17,13 @@ export default async function BoardActionPage({ params }: { params: {username: s
         else{
             href = `/${params.username}`;
         }
+
+        return (
+            <Page href={href} />
+        );
     }
     catch(e){
         console.error(e);
-        href = `/${params.username}`;
+        notFound();
     }
-
-    return (
-        <Page href={href} />
-    );
 }
