@@ -10,7 +10,6 @@ export default async function TaskPage({ params }: { params: { username: string,
         const session = await getSession();
         const board = await axios.get(`${URI}/api/v1/${params.username}/board/${params.boardName}`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});
 
-
         return (
             <Page href={`/${params.username}/${params.boardName}`} />
         );
