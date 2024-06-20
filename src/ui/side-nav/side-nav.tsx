@@ -13,7 +13,7 @@ import { useTheme } from 'next-themes';
 import { useUser } from '@auth0/nextjs-auth0/client';
 import { Claims } from '@auth0/nextjs-auth0';
 
-export default function SideNav({ boards, user }: { boards: IBoardNames[], user: Claims | undefined }){
+export default function SideNav({ boards, user }: { boards: {myBoards: IBoardNames[], otherBoards: IBoardNames[]}, user: Claims | undefined }){
 
     const { isNavOpen, setIsNavOpen } = useContext(NavContext);
     const [isShrunken, setIsShrunken] = useState(false);
@@ -25,7 +25,7 @@ export default function SideNav({ boards, user }: { boards: IBoardNames[], user:
     const router = useRouter();
     const { boardName, username } = useParams();
 
-    const selected = boards.find(board => board.slugified === boardName);
+    const selected = boards.myBoards.find(board => board.slugified === boardName && board.owner === username) || boards.otherBoards.find(board => board.slugified === boardName && board.owner === username);
 
     const overlayClick = (event: MouseEvent<HTMLDivElement>) => {
         if(window.screen.width < 768){
@@ -60,13 +60,13 @@ export default function SideNav({ boards, user }: { boards: IBoardNames[], user:
         <>
             <div className={`${style['overlay']} ${isNavOpen ? style['overlay--show'] : ''} ${isShrunken ? style['overlay--shrink'] : ''}`} onClick={overlayClick}>
                 <nav className={`${style['nav']}`} onClick={navClick}>
-                    <h2 className={`${style['nav__count']}`}>ALL BOARDS ({boards.length})</h2>
+                    <h2 className={`${style['nav__count']}`}>MY BOARDS ({boards.myBoards.length})</h2>
                     <ul className={`${style['nav__titles']}`}>
                         {
-                            boards.map(board => {
+                            boards.myBoards.map(board => {
                                 return (
                                     <li key={board._id} onClick={itemClick}>
-                                        <Link className={`${style['nav__link']} ${selected?.slugified === board.slugified ? style['nav__link--selected'] : ''}`} href={`/${username}/${board.slugified}`}>
+                                        <Link className={`${style['nav__link']} ${selected?.slugified === board.slugified && selected?.owner === board.owner ? style['nav__link--selected'] : ''}`} href={`/${board.owner}/${board.slugified}`}>
                                         <span className={`${style['nav__text']}`}>{board.name}</span>
                                         </Link>
                                     </li>
@@ -77,6 +77,25 @@ export default function SideNav({ boards, user }: { boards: IBoardNames[], user:
                             <Link href={`/${username}/add`} className={`${style['nav__link']} ${style['nav__create']}`}>+ Create New Board</Link>
                         </li>
                     </ul>
+
+                    { boards.otherBoards.length ? 
+                    <>
+                    <h2 className={`${style['nav__count']} ${style['nav__count--top']}`}>OTHER BOARDS ({boards.otherBoards.length})</h2>
+                    <ul className={`${style['nav__titles']}`}>
+                        {
+                            boards.otherBoards.map(board => {
+                                return (
+                                    <li key={board._id} onClick={itemClick}>
+                                        <Link className={`${style['nav__link']} ${selected?.slugified === board.slugified && selected?.owner === board.owner ? style['nav__link--selected'] : ''}`} href={`/${board.owner}/${board.slugified}`}>
+                                        <span className={`${style['nav__text']}`}>{board.name}</span>
+                                        </Link>
+                                    </li>
+                                );
+                            })
+                        }
+                    </ul>
+                    </> : null}
+                    
                     <div className={`${style['nav__theme']}`}>
                         <Image className={`${!isMounted ? style['nav--opaque'] : ''}`} src={sun} alt='sun icon for theme'></Image>
                         <div  className={`${style['nav__toggle-container']} ${!isMounted ? style['nav--opaque'] : ''} ${isMounted && resolvedTheme === 'dark' ? style['nav__toggle-container--right'] : ''}`} onClick={toggleClick}>

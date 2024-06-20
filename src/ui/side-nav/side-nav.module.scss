@@ -59,6 +59,10 @@
     &__count{
         @include heading-s;
         padding-left: 1.5rem;
+
+        &--top{
+            margin-top: 4rem;
+        }
     }
 
     &__titles{

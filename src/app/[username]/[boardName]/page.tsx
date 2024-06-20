@@ -13,7 +13,6 @@ export default async function Username({ params }: { params: { username: string,
         const session = await getSession();
         const { data: boards } = await axios.get(`${URI}/api/v1/${params.username}/boards`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});
         const { data: columns } = await axios.get(`${URI}/api/v1/${params.username}/columns/${params.boardName}`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});
-
         return (
             <>
                 <Header boards={boards} params={params} user={session?.user}/>

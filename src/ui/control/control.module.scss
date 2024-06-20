@@ -7,6 +7,10 @@
     position: relative;
     z-index: 1000;
 
+    &--hide{
+        visibility: hidden;
+    }
+
     &__ellipsis{
         min-width: 0.25rem;
         min-height: 1rem;

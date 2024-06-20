@@ -8,7 +8,7 @@ export default async function AddModal(){
 
     return(
         <Modal>
-            <BoardAction accessToken={session?.accessToken}/>
+            <BoardAction accessToken={session?.accessToken} user={session?.user}/>
         </Modal>
     );
 }

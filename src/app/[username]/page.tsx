@@ -26,9 +26,9 @@ export default async function Username({params}: {params: {username: string}}) {
         else if (status === 204) {
             return (
                 <>
-                    <Header boards={[]} params={params} user={session?.user} />
+                    <Header boards={{myBoards: [], otherBoards: []}} params={params} user={session?.user} />
                     <main className={`${style['main']}`}>
-                        <SideNav boards={[]} user={session?.user}/>
+                        <SideNav boards={{myBoards: [], otherBoards: []}} user={session?.user}/>
                         {
                             <div className={`${style['main__page']} ${!data.length ? style["main__page--show"] : ''}`}>
                                 <p className={`${style['main__text']}`}>You don{`'`}t have a board. Create a new board to get started.</p>

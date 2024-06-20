@@ -6,12 +6,12 @@ import style from './title.module.scss';
 import { useContext } from "react";
 import { NavContext } from "../provider/provider";
 
-export default function Title({ boards }: { boards: IBoardNames[] }) {
+export default function Title({ boards }: { boards: {myBoards: IBoardNames[], otherBoards: IBoardNames[]} }) {
 
-    const { boardName } = useParams();
+    const { boardName, username } = useParams();
     const { isNavOpen, setIsNavOpen } = useContext(NavContext);
 
-    const selected = boards.find(board => board.slugified === boardName);
+    const selected = boards.myBoards.find(board => board.slugified === boardName && board.owner === username) || boards.otherBoards.find(board => board.slugified === boardName && board.owner === username);
 
     const handleClick = () => {
         setIsNavOpen(!isNavOpen);
