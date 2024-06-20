@@ -16,7 +16,7 @@ export default async function Username({ params }: { params: { username: string,
 
         return (
             <>
-                <Header boards={boards} params={params}/>
+                <Header boards={boards} params={params} user={session?.user}/>
                 <main className={`${style['main']}`}>
                     <SideNav boards={boards}  user={session?.user} />
                     <Columns columns={columns} />

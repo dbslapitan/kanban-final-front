@@ -5,7 +5,7 @@ import Title from "@/ui/title/title";
 import Control from "@/ui/control/control";
 import { Claims } from "@auth0/nextjs-auth0";
 
-export default async function Header({ boards, params  }: { boards: IBoardNames[], params:  { username: string, boardName?: string, taskId?: string } }) {
+export default async function Header({ boards, params, user  }: { boards: IBoardNames[], params:  { username: string, boardName?: string, taskId?: string }, user: Claims | undefined }) {
 
     return (
         <header className={`${style["header"]}`}>
@@ -17,7 +17,7 @@ export default async function Header({ boards, params  }: { boards: IBoardNames[
                 <Link className={`${style['add']} ${!boards.length ? style['add--disabled'] : ''}`} href={`/${params.username}/${params.boardName}/add`}>
                     <span className={`${style['add__text']}`}>Add New Task</span>
                 </Link>
-                <Control level="Board" isDisabled={ !!!boards.length }/>
+                <Control level="Board" isDisabled={ !!!boards.length } user={user}/>
             </div>
         </header>
     );

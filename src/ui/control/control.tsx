@@ -5,8 +5,9 @@ import style from './control.module.scss';
 import { MutableRefObject, MouseEvent as ReactMouseEvent, useContext, useEffect, useState } from 'react';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { ModalContext } from '../modal/modal';
+import { Claims } from '@auth0/nextjs-auth0';
 
-export default function Control({ level, isDisabled }: { level: string, isDisabled: boolean }) {
+export default function Control({ level, isDisabled, user }: { level: string, isDisabled: boolean, user: Claims | undefined }) {
 
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const { username, boardName, taskId } = useParams();
@@ -66,9 +67,10 @@ export default function Control({ level, isDisabled }: { level: string, isDisabl
                     <li>
                         <Link href={`/${username}/${boardName}/edit`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`}>{`Edit ${level}`}</Link>
                     </li>
-                    <li>
+                   { user ? 
+                   <li>
                         <Link href={`/${username}/${boardName}/editors`} className={`${style["options__option"]} ${style["options__option--edit"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Editors`}</Link>
-                    </li>
+                    </li> : null}
                     <li>
                         <Link href={`/${username}/${boardName}/delete`} className={`${style["options__option"]} ${style["options__option--delete"]} ${isDisabled ? style['options__option--disabled'] : ''}`} >{`Delete ${level}`}</Link>
                     </li>

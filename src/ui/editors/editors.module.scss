@@ -42,6 +42,9 @@
     &__item{
         border-bottom: var(--border);
         
+        &:last-of-type{
+            border-bottom: none;
+        }
     }
 
     &__usernames{
@@ -57,5 +60,34 @@
         &--show{
             display: block;
         }
+    }
+
+    &__editors{
+        margin-top: 1rem;
+        display: flex;
+        column-gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    &__editor{
+        @include body-l;
+    }
+    
+    &__delete{
+        min-width: 0.9375rem;
+        min-height: 0.9375rem;
+        background-color: inherit;
+        border: none;
+        background-image: url('../../../public/icons/icon-cross.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-left: 0.25rem;
+    }
+
+    &__container{
+        display: flex;
+        border: 1px solid $lightPurple;
+        padding: 0.125rem 0.125rem;
+        border-radius: 8px;
     }
 }

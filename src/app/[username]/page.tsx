@@ -19,14 +19,14 @@ export default async function Username({params}: {params: {username: string}}) {
         }
 
         const { status, data } = await axios.get(`${URI}/api/v1/${params.username}`, {headers: header});
-
+        
         if (status === 200) {
             boardname = data;
         }
         else if (status === 204) {
             return (
                 <>
-                    <Header boards={[]} params={params} />
+                    <Header boards={[]} params={params} user={session?.user} />
                     <main className={`${style['main']}`}>
                         <SideNav boards={[]} user={session?.user}/>
                         {
