@@ -6,9 +6,6 @@ import { notFound } from "next/navigation";
 import style from './board.module.scss';
 import Columns from "@/ui/columns/columns";
 import { getSession } from "@auth0/nextjs-auth0";
-import { v4 as uuidv4 } from 'uuid';
-
-export const dynamic = 'force_dynamic';
 
 export default async function Username({ params }: { params: { username: string, boardName: string, taskId: string } }) {
     try {

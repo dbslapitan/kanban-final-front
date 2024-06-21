@@ -13,7 +13,7 @@ export default async function EditBoardModal({params}: {params: {boardName: stri
     
         return (
             <Modal>
-                <BoardAction data={board} accessToken={accessToken}/>
+                <BoardAction data={board} accessToken={accessToken} user={session?.user}/>
             </Modal>
         );
     }
