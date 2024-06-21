@@ -61,7 +61,7 @@ export default function Control({ level, isDisabled, user }: { level: string, is
 
     return (
         <>
-            <div className={`${style["control"]} ${user?.username !== username ? style["control--hide"] : ''}`}>
+            <div className={`${style["control"]} ${user?.username === username || !user ? '' : style["control--hide"]}`}>
                 <button className={`${style["control__ellipsis"]}`} onClick={toggleOptions}></button>
                 <ul className={`${style["options"]} ${isOptionsOpen ? style["options--show"] : ""}`}>
                     <li>

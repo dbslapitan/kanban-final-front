@@ -49,6 +49,7 @@ ul{
     --hoverBackground: #635FC71A;
     --checkboxBorder: #828fa340;
     --subtaskColor: #00011240;
+    --addColumn: #E9EFFA4D;
 }
 
 [data-theme='dark']{
@@ -64,6 +65,7 @@ ul{
     --hoverBackground: #FFFFFF;
     --checkboxBorder: #{$white};
     --subtaskColor: #FFFFFF40;
+    --addColumn: #2B2C3740;
 }
 
 .input{
