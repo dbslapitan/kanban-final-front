@@ -8,6 +8,7 @@ import { ITask } from '@/models/task';
 import { IColumn } from '@/models/column';
 import Control from '../control/control';
 import { ModalContext } from '../modal/modal';
+import { revalidate } from '@/libs/server-actions';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -17,7 +18,7 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
     const [selected, setSelected] = useState(task.status);
     const [isSelectOpen, setIsSelectOpen] = useState(false);
     const { isRefresh } = useContext(ModalContext);
-    const { username } = useParams();
+    const { username, boardName } = useParams();
 
     const router = useRouter();
 
@@ -43,6 +44,7 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
     const optionClickHandler = async (e: MouseEvent, id: string) => {
         setSelected(id);
         const taskTemp: ITask = JSON.parse(JSON.stringify(newTask));
+        console.log(taskTemp);
         taskTemp.status = id;
         try{
             const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
@@ -58,7 +60,7 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
         <section className={`${style['task']}`} onClick={() => { return isSelectOpen ? setIsSelectOpen(false) : null }}>
             <div className={`${style['task__position']}`}>
                 <h1 className={`${style['task__title']}`}>{task.title}</h1>
-                <Control level={"Task"} isDisabled={false} />
+                <Control level={"Task"} isDisabled={false} user={undefined}/>
             </div>
             <p className={`${style['task__description']}`}>{task.description}</p>
             <h2 className={`${style['task__sub']}`}>Subtasks ({`${completed.length} of ${task.subtasks.length}`})</h2>

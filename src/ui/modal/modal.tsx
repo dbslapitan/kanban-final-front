@@ -1,8 +1,9 @@
 'use client';
 
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { MutableRefObject, ReactNode, createContext, useEffect, useRef, useState } from "react";
 import style from "./modal.module.scss";
+import { revalidate } from "@/libs/server-actions";
 
 export const ModalContext = createContext<{isRefresh: MutableRefObject<boolean> | null, isRedirect: MutableRefObject<boolean> | null}>({isRefresh: null, isRedirect: null});
 
@@ -27,7 +28,7 @@ export default function Modal({ children }: { children: ReactNode }) {
         return () => {
             window.removeEventListener('keydown', listener);
             if(mounted && isRefresh.current && !isRedirect.current){
-                router.refresh();
+                window.location.reload();
             }
         };
     }, [mounted, router, isRefresh]);
