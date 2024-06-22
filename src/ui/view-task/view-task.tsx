@@ -33,7 +33,7 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
         taskTemp.subtasks[index].isCompleted = !taskTemp.subtasks[index].isCompleted;
         setNewTask(taskTemp);
 
-        (taskUpdate as MutableRefObject<string>).current = taskId as string;
+        (taskUpdate as MutableRefObject<boolean>).current = true;
 
         try{
 
@@ -49,8 +49,8 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
     const optionClickHandler = async (e: MouseEvent, id: string) => {
         setSelected(id);
         const taskTemp: ITask = JSON.parse(JSON.stringify(newTask));
-        console.log(taskTemp);
         taskTemp.status = id;
+        (taskUpdate as MutableRefObject<boolean>).current = true;
         try{
             const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
             (isRefresh as MutableRefObject<boolean>).current = true;

@@ -9,7 +9,7 @@ export const NavContext = createContext<INavContext>({isNavOpen: false, setIsNav
 export function Providers({children}: {children: ReactNode}){
 
     const [isNavOpen, setIsNavOpen] = useState(false);
-    const taskUpdate = useRef<string>('');
+    const taskUpdate = useRef<boolean>(false);
 
     return (
         <NavContext.Provider value={{ isNavOpen, setIsNavOpen, taskUpdate }}>
@@ -25,5 +25,5 @@ export function Providers({children}: {children: ReactNode}){
 interface INavContext{
     isNavOpen: boolean,
     setIsNavOpen: Dispatch<SetStateAction<boolean>>,
-    taskUpdate: MutableRefObject<string> | null
+    taskUpdate: MutableRefObject<boolean> | null
 }
