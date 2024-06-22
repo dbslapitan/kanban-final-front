@@ -46,7 +46,7 @@ export default function Column({ column, index, accessToken } : { column: IColum
             (setMyColumns as Dispatch<SetStateAction<IColumn[]>>)(columnsTemp);
             (setDraggedObject as Dispatch<SetStateAction<{previousIndex: number, task: ITask}>>)(emptyTask);
             try{
-                await axios.patch(`${URI}/api/v1/${username}/task/${draggedObject?.task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
+                await axios.patch(`${URI}/api/v1/${username}/task/update/${draggedObject?.task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
                 navigate(`/${username}/${boardName}`);
             }
             catch(e){
