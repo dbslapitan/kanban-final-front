@@ -27,7 +27,12 @@ export default function Username() {
                 navigate('/api/auth/login');
             }
             catch(e){
-                console.error(e);
+                console.log(e);
+                if(axios.isAxiosError(e)){
+                    if(e.response?.status === 400){
+                        setIsUsernameInvalid(e.response.data);
+                    }
+                }
             }
         }
     };
