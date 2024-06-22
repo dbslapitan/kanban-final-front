@@ -27,6 +27,7 @@ export default function Modal({ children }: { children: ReactNode }) {
         return () => {
             window.removeEventListener('keydown', listener);
             if(mounted && isRefresh.current && !isRedirect.current){
+                console.log(window.scrollY);
                 router.refresh();
             }
         };

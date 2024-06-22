@@ -9,7 +9,6 @@ import { ColumnContext } from '../columns/columns';
 import axios from 'axios';
 import { URI } from '@/libs/constants';
 import { useParams, useRouter } from 'next/navigation';
-import { Claims } from '@auth0/nextjs-auth0';
 import { navigate } from '@/libs/server-actions';
 
 export default function Column({ column, index, accessToken } : { column: IColumn, index: number, accessToken: string | undefined }){

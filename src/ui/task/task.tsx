@@ -12,6 +12,8 @@ export default function Task({ task, index }: { task: ITask, index: number }){
     const { username, boardName } = useParams();
     const {setDraggedObject} = useContext(ColumnContext);
 
+    
+
     const completed = task.subtasks.reduce((accumulator, current) => {
         if(current.isCompleted){
             accumulator++;

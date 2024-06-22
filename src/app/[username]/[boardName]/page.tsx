@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import style from './board.module.scss';
 import Columns from "@/ui/columns/columns";
 import { getSession } from "@auth0/nextjs-auth0";
+import ColumnsContainer from "@/ui/columns-container/columns-container";
 
 export default async function Username({ params }: { params: { username: string, boardName: string, taskId: string } }) {
     try {
@@ -18,7 +19,7 @@ export default async function Username({ params }: { params: { username: string,
                 <Header boards={boards} params={params} user={session?.user}/>
                 <main className={`${style['main']}`}>
                     <SideNav boards={boards}  user={session?.user} />
-                    <Columns columns={columns} accessToken={session?.accessToken}/>
+                    <ColumnsContainer columns={columns} accessToken={session?.accessToken}/>
                 </main>
             </>
         );
