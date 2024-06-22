@@ -9,6 +9,7 @@ import { IColumn } from '@/models/column';
 import { ISubTask, ITask } from '@/models/task';
 import { ModalContext } from '../modal/modal';
 import { plusJakartaSans } from '@/libs/fonts';
+import { NavContext } from '../provider/provider';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -40,6 +41,7 @@ export default function TaskAction({ columns, task = null, accessToken }: { colu
     const [status, setStatus] = useState(tempStatus);
     const [isSelectOpen, setIsSelectOpen] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const { taskUpdate } = useContext(NavContext);
 
     const handleTitle = (event: ChangeEvent) => {
         const value = (event.target as HTMLInputElement).value;
@@ -72,6 +74,7 @@ export default function TaskAction({ columns, task = null, accessToken }: { colu
                 if(task){
                     await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
                     (isRefresh as MutableRefObject<boolean>).current = true;
+                    (taskUpdate as MutableRefObject<boolean>).current = true;
                     router.back();
                 }
                 else{

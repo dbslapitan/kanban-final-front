@@ -8,6 +8,7 @@ import { navigate } from '@/libs/server-actions';
 import { ITask } from '@/models/task';
 import { IBoardNames } from '@/models/board-names';
 import { ModalContext } from '../modal/modal';
+import { NavContext } from '../provider/provider';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -17,6 +18,7 @@ export default function Delete({ data, accessToken }: { data: IBoardNames | ITas
     const router = useRouter();
 
     const { isRefresh } = useContext(ModalContext);
+    const { taskUpdate } = useContext(NavContext);
 
     const deleteHandler = async () => {
 
@@ -24,6 +26,7 @@ export default function Delete({ data, accessToken }: { data: IBoardNames | ITas
             try {
                 const { status } = await axios.delete(`${URI}/api/v1/${username}/task/${taskId}`, {headers: {Authorization: `Bearer ${accessToken}`}});
                 (isRefresh as MutableRefObject<boolean>).current = true;
+                (taskUpdate as MutableRefObject<boolean>).current = true;
                 router.back();
             }
             catch (e) {
