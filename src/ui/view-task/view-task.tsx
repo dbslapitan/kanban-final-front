@@ -8,7 +8,7 @@ import { ITask } from '@/models/task';
 import { IColumn } from '@/models/column';
 import Control from '../control/control';
 import { ModalContext } from '../modal/modal';
-import { revalidate } from '@/libs/server-actions';
+import { NavContext } from '../provider/provider';
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
@@ -18,7 +18,9 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
     const [selected, setSelected] = useState(task.status);
     const [isSelectOpen, setIsSelectOpen] = useState(false);
     const { isRefresh } = useContext(ModalContext);
-    const { username, boardName } = useParams();
+    const { username, boardName, taskId } = useParams();
+
+    const { taskUpdate } = useContext(NavContext);
 
     const router = useRouter();
 
@@ -31,7 +33,10 @@ export default function ViewTask({ task, columns, accessToken }: { task: ITask, 
         taskTemp.subtasks[index].isCompleted = !taskTemp.subtasks[index].isCompleted;
         setNewTask(taskTemp);
 
+        (taskUpdate as MutableRefObject<string>).current = taskId as string;
+
         try{
+
             const { status } = await axios.patch(`${URI}/api/v1/${username}/task/${task._id}`, taskTemp, {headers: {Authorization: `Bearer ${accessToken}`}});
             (isRefresh as MutableRefObject<boolean>).current = true;
         }
