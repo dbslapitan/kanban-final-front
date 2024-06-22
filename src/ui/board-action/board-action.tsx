@@ -5,10 +5,11 @@ import { navigate } from "@/libs/server-actions";
 import { IBoard } from "@/models/board";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, MouseEvent, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEvent, MutableRefObject, useContext, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import style from "./board-action.module.scss";
 import { Claims } from "@auth0/nextjs-auth0";
+import { NavContext } from "../provider/provider";
 
 export default function BoardAction({ data = null, accessToken, user }: { data?: null | IBoard, accessToken: string | undefined, user: Claims | undefined }) {
 
@@ -38,6 +39,7 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
     const [columns, setColumns] = useState(tempColumns);
     const [name, setName] = useState(tempName);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const { taskUpdate } = useContext(NavContext);
 
     const formRef = useRef(null);
 
@@ -73,6 +75,7 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
             });
             try {
                 if (name && columns.every(column => !!column.value)) {
+                    (taskUpdate as MutableRefObject<boolean>).current = true;
                     const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/${username}/board/edit/${data._id}`, { name, columns: mappedColumns}, {headers: {Authorization: `Bearer ${accessToken}`}});
                     navigate(`/${username}/${updatedBoard}`);
                 }
