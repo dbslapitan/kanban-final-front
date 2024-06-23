@@ -131,9 +131,9 @@ export default function TaskAction({ columns, task = null, accessToken }: { colu
                     subtasks.map((subtask, index) => {
                         return (
                             <li className={`input-container ${style['action__item']}`} key={subtask._id}>
+                                <button type='button' className={`${style['action__delete']}`} onClick={(e) => handleDeleteSubtask(e, index)}></button>
                                 <input name={`subtask-${index} `} placeholder='e.g. Make coffee' onChange={(e) => handleSubtask(e, index)} className={`input ${style['action__subtask']} ${isSubmitted && !subtasks[index].title ? 'input__error' : ''}`} type='text' id={`input subtasks-${index}`} defaultValue={subtasks[index].title} />
                                 <span className={`input__message`}>Can&apos;t be empty</span>
-                                <button type='button' className={`${style['action__delete']}`} onClick={(e) => handleDeleteSubtask(e, index)}></button>
                             </li>
                         );
                     })
