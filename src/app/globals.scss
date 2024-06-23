@@ -50,6 +50,7 @@ ul{
     --checkboxBorder: #828fa340;
     --subtaskColor: #00011240;
     --addColumn: #E9EFFA4D;
+    --buttonSecondary: #635FC740;
 }
 
 [data-theme='dark']{
@@ -66,6 +67,7 @@ ul{
     --checkboxBorder: #{$white};
     --subtaskColor: #FFFFFF40;
     --addColumn: #2B2C3740;
+    --buttonSecondary: #FFFFFF;
 }
 
 .input{
