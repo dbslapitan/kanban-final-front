@@ -149,6 +149,7 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
                     columns.map((column, index) => {
                         return (
                             <li key={column.key} className={`input-container ${style['add__container']}`}>
+                                <button type='button' className={`${style['columns__delete']}`} onClick={(e) => deleteColumnHandler(e, index)}></button>
                                 <input
                                     className={`input ${style['columns__input']} ${isSubmitted && !columns[index].value ? 'input__error' : ''}`}
                                     type="text" name='columns' placeholder='e. g. To Do'
@@ -156,7 +157,6 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
                                     onChange={(e) => columnsOnChage(e, index)}
                                 />
                                 <span className={`input__message`}>Can&apos;t be empty</span>
-                                <button type='button' className={`${style['columns__delete']}`} onClick={(e) => deleteColumnHandler(e, index)}></button>
                             </li>
                         )
                     })

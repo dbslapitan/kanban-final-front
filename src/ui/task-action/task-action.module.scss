@@ -67,6 +67,11 @@
         color: $white;
         background-color: $purple;
         margin-top: 0.5rem;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #A8A4FFE6;
+        }
     }
     
     &__status-container{

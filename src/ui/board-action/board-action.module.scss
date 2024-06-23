@@ -34,6 +34,11 @@
         width: 100%;
         background-color: $purple;
         color: $white;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #A8A4FFE6;
+        }
     }
 
     &__container{
@@ -48,6 +53,11 @@
         color: $purple;
         background-color: var(--buttonBackground);
         margin-top: 0.75rem;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #635FC740;
+        }
     }
 
     &__input{
@@ -59,8 +69,20 @@
         min-height: 0.9375rem;
         background-color: inherit;
         border: none;
-        background-image: url('../../../public/icons/icon-cross.svg');
-        background-repeat: no-repeat;
-        background-position: center;
+        mask: url('../../../public/icons/icon-cross.svg');
+        background-color: #828FA3;
+        mask-repeat: no-repeat;
+        mask-position: center;
+        order: 1;
+
+        &:hover{
+            cursor: pointer;
+            background-color: $red;
+
+            & + .columns__input{
+                border-color: $red;
+
+            }
+        }
     }
 }
