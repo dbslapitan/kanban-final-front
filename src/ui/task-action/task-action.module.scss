@@ -62,6 +62,7 @@
 
         &:hover{
             background-color: $red;
+            cursor: pointer;
 
             & + .action__subtask{
                 border-color: $red;
