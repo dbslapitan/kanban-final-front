@@ -34,6 +34,11 @@
         width: 100%;
         background-color: $purple;
         color: $white;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #A8A4FFE6;
+        }
     }
 
     &__container{
@@ -48,6 +53,10 @@
         color: $purple;
         background-color: var(--buttonBackground);
         margin-top: 0.75rem;
+
+        &:hover{
+            cursor: pointer;
+        }
     }
 
     &__input{

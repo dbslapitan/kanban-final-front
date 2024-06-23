@@ -53,6 +53,10 @@
         background-image: url('../../../public/icons/icon-cross.svg');
         background-repeat: no-repeat;
         background-position: center;
+
+        &:hover{
+            cursor: pointer;
+        }
     }
 
     &__add{
@@ -60,6 +64,10 @@
         margin-top: 0.75rem;
         color: $purple;
         background-color: var(--buttonBackground);
+
+        &:hover{
+            cursor: pointer;
+        }
     }
 
     &__submit{
@@ -67,6 +75,11 @@
         color: $white;
         background-color: $purple;
         margin-top: 0.5rem;
+
+        &:hover{
+            cursor: pointer;
+            background-color: #A8A4FFE6;
+        }
     }
     
     &__status-container{

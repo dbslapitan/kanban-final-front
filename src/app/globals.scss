@@ -141,4 +141,8 @@ ul{
     border-radius: 1.25rem;
     border: none;
     font-weight: $bold;
+
+    :hover{
+        cursor: pointer;
+    }
 }
