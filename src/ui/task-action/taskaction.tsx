@@ -80,6 +80,7 @@ export default function TaskAction({ columns, task = null, accessToken }: { colu
                 else{
                     await axios.post(`${URI}/api/v1/${username}/task`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
                     (isRefresh as MutableRefObject<boolean>).current = true;
+                    (taskUpdate as MutableRefObject<boolean>).current = true;
                     router.back();
                 }
             }
@@ -155,7 +156,7 @@ export default function TaskAction({ columns, task = null, accessToken }: { colu
                     }
                 </ul>
             </div>
-            <button className={`button ${style['action__submit']}`}>{`${task ? 'Save Change': 'Create Task'} `}</button>
+            <button onClick={handleSubmit} className={`button ${style['action__submit']}`}>{`${task ? 'Save Change': 'Create Task'} `}</button>
         </form>
     );
 }
