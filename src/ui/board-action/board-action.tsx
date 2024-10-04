@@ -95,8 +95,8 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
             }
             if (name && columns.every(column => !!column.value)) {
                 try {
-                    const { data } = await axios.post(`${URI}/api/v1/${user?.username}/board/`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
-                    navigate(`/${user?.username}/${data}`);
+                    const { data } = await axios.post(`${URI}/api/v1/${user?.username || `preview`}/board/`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
+                    navigate(`/${user?.username || `preview`}/${data}`);
                 }
                 catch (e) {
                     if (axios.isAxiosError(e)) {
