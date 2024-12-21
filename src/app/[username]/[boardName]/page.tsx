@@ -7,7 +7,10 @@ import style from './board.module.scss';
 import Columns from "@/ui/columns/columns";
 import { getSession } from "@auth0/nextjs-auth0";
 
-export default async function Username({ params }: { params: { username: string, boardName: string, taskId: string } }) {
+export default async function Username(
+    props: { params: Promise<{ username: string, boardName: string, taskId: string }> }
+) {
+    const params = await props.params;
     try {
         const session = await getSession();
         const { data: boards } = await axios.get(`${URI}/api/v1/${params.username}/boards`, {headers: {Authorization: `Bearer ${session?.accessToken}`}});

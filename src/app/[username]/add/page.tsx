@@ -4,7 +4,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
-export default async function BoardActionPage({ params }: { params: {username: string, boardName: string}}){
+export default async function BoardActionPage(props: { params: Promise<{username: string, boardName: string}>}) {
+    const params = await props.params;
 
     let href = '/';
     const session = await getSession();

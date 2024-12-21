@@ -5,7 +5,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
-export default async function EditBoardModal({params}: {params: {boardName: string, username: string}}){
+export default async function EditBoardModal(props: {params: Promise<{boardName: string, username: string}>}) {
+    const params = await props.params;
     try{
         const session = await getSession();
         const accessToken = session ? `${session.accessToken}` : '';

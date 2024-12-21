@@ -7,7 +7,8 @@ import axios from "axios";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 
-export default async function DeleteBoardModal({params}: {params: {username: string, boardName: string}}){
+export default async function DeleteBoardModal(props: {params: Promise<{username: string, boardName: string}>}) {
+    const params = await props.params;
 
     const session = await getSession();
     const accessToken = session ? `${session.accessToken}` : '';
@@ -25,5 +26,4 @@ export default async function DeleteBoardModal({params}: {params: {username: str
         console.error(e);
         notFound();
     }
-
 }

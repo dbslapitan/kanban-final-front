@@ -5,7 +5,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 import axios from "axios";
 import { notFound } from "next/navigation";
 
-export default async function EditorsPage({ params }: { params: { boardName: string, username: string } }) {
+export default async function EditorsPage(props: { params: Promise<{ boardName: string, username: string }> }) {
+    const params = await props.params;
 
     const session = await getSession();
 

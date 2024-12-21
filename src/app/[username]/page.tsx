@@ -8,7 +8,8 @@ import { getSession } from "@auth0/nextjs-auth0";
 
 const URI = process.env.NEXT_PUBLIC_URI;
 
-export default async function Username({params}: {params: {username: string}}) {
+export default async function Username(props: {params: Promise<{username: string}>}) {
+    const params = await props.params;
 
     let boardname = '';
     const session = await getSession();

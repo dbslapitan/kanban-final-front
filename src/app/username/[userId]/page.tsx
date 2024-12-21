@@ -4,7 +4,8 @@ import axios from "axios";
 import { URI } from "@/libs/constants";
 import { notFound, redirect } from "next/navigation";
 
-export default async function UsernamePage({params}: {params: {userId: string}}) {
+export default async function UsernamePage(props: {params: Promise<{userId: string}>}) {
+    const params = await props.params;
 
     let isRedirect = false;
 
