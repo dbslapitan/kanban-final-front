@@ -78,6 +78,7 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
                     (taskUpdate as MutableRefObject<boolean>).current = true;
                     const {status, data: updatedBoard} = await axios.patch(`${URI}/api/v1/${username}/board/edit/${data._id}`, { name, columns: mappedColumns}, {headers: {Authorization: `Bearer ${accessToken}`}});
                     navigate(`/${username}/${updatedBoard}`);
+                    router.back();
                 }
             }
             catch (e) {
@@ -97,6 +98,7 @@ export default function BoardAction({ data = null, accessToken, user }: { data?:
                 try {
                     const { data } = await axios.post(`${URI}/api/v1/${user?.username || `preview`}/board/`, body, {headers: {Authorization: `Bearer ${accessToken}`}});
                     navigate(`/${user?.username || `preview`}/${data}`);
+                    router.back();
                 }
                 catch (e) {
                     if (axios.isAxiosError(e)) {
